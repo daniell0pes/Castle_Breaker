@@ -1,10 +1,7 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 
-var tile = {
-    width : canvas.width/30,
-    height : canvas.height/20
-}
+
 
 class GameObject extends EventTarget { //EventTarget por causa dos listeners
 
