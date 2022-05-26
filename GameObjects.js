@@ -36,7 +36,7 @@ class Sprite extends GameObject {
 
     draw() {
         ctx.drawImage(this.images[0], this.x, this.y, this.width, this.height); //default para uma imagem, redefinir nas classes derivadas caso seja necessarias mais,
-    }                                                                       //adicionar argumentos para alterar indice de array
+    }                                                                           //adicionar argumentos para alterar indice de array
 
     load(...urlImages){ //método mitico de load a várias imagens
         let i=0;
