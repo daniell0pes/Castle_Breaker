@@ -119,8 +119,8 @@ class Level extends Sprite{
 
     }
 
-    draw(){
-
+    draw(level){
+        ctx.drawImage(level, 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
     }
 
     load(...urlImages){
