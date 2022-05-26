@@ -1,8 +1,6 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 
-
-
 class GameObject extends EventTarget { //EventTarget por causa dos listeners
 
     constructor( x, y, width, height ) {
