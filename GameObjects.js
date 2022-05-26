@@ -1,6 +1,9 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 class GameObject extends EventTarget { //EventTarget por causa dos listeners
 
     constructor( x, y, width, height ) {
@@ -119,7 +122,8 @@ class Level extends Sprite{
     }
 
     draw(level){
-        ctx.drawImage(this.levelsArray[level-1], 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.levelsArray[level-1], 0, 0, this.levelsArray[level-1].width,
+            this.levelsArray[level-1].height, this.x, this.y, this.width, this.height);
     }
 
     load(...urlImages){
