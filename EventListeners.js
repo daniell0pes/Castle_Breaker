@@ -1,6 +1,4 @@
 let keys = [];
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
 let existe=false;
 addEventListener("keyup", event=>{
