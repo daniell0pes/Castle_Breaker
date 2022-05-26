@@ -79,14 +79,14 @@ class AnimatedSprite extends Sprite {
 
         this.currentFrame++;
 
-        if (this.currentFrame > this.constructor.numberFrames)
+        if (this.currentFrame > this.numberFrames)
             this.currentFrame = 1;
 
-        let deltaX = (this.currentFrame - 1) % this.constructor.numberFramesPerRow;
-        let deltaY = Math.floor((this.currentFrame - 1) / this.constructor.numberFramesPerRow);
+        let deltaX = (this.currentFrame - 1) % this.numberFramesPerRow;
+        let deltaY = Math.floor((this.currentFrame - 1) / this.numberFramesPerRow);
 
-        this.sx = deltaX * this.constructor.slice.width;
-        this.sy = deltaY * this.constructor.slice.height;
+        this.sx = deltaX * this.slice.width;
+        this.sy = deltaY * this.slice.height;
     }
 
     load(numberFrames, numberFramesPerRow,...urlImages) {
@@ -156,11 +156,13 @@ class Player extends AnimatedSprite{
         super(x,y,width,height);
 
         this.level=1;
-        this.direction="";
+        this.direction="right";
+        this.state=3;
     }
 
     move(key){
-        this.draw(1)
+        this.draw(this.state)
+        this.update();
 
         if (this.x>canvas.width){
             this.x=200
@@ -169,15 +171,19 @@ class Player extends AnimatedSprite{
 
         for (let i =0;i<key.length;i++) {
             if (key[i] == "d") {
+                this.direction="right";
                 this.x += 3;
             }
             if (key[i] == "w") {
+                this.direction="up"
                 this.y -= 3;
             }
             if (key[i]== "a") {
+                this.direction="left"
                 this.x -= 3;
             }
             if (key[i]== "s") {
+                this.direction="down"
                 this.y += 3;
 
             }

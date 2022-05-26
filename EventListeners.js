@@ -9,6 +9,7 @@ addEventListener("keyup", event=>{
             keys.splice(i,1);
         }
     }
+    //idle_setter()
 })
 
 window.addEventListener('keydown',event=>{
