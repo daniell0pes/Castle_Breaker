@@ -126,16 +126,14 @@ class Level extends Sprite{
             this.levelsArray[level-1].height, this.x, this.y, this.width, this.height);
     }
 
-    load(...urlImages){
-
+    load(...urlImages){ //método mitico de load a várias imagens
+        let i=0;
         for(let url of urlImages){
-            let i=0;
             this.levelsArray.push(new Image());
             this.levelsArray[i].src=url;
             i++;
+            console.log(i);
         }
-
-        //Sprite.imagem = new Image();
 
         this.levelsArray.forEach(level =>{
             level.addEventListener("load", e=>{
@@ -143,7 +141,6 @@ class Level extends Sprite{
             })
         })
 
-        //Sprite.imagem.src = urlImagem;
     }
 }
 
