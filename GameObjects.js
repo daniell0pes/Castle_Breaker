@@ -119,13 +119,16 @@ class Level extends Sprite{
     }
 
     draw(level){
-        ctx.drawImage(this.levelsArray[level], 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.levelsArray[level-1], 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
     }
 
     load(...urlImages){
 
         for(let url of urlImages){
-            this.levelsArray.push(new Image().src=url);
+            let i=0;
+            this.levelsArray.push(new Image());
+            this.levelsArray[i].src=url;
+            i++;
         }
 
         //Sprite.imagem = new Image();
