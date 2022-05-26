@@ -1,8 +1,13 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
-
+let keys = [];
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
+var tile = {
+    width : canvas.width/30,
+    height : canvas.height/20
+}
 
 class GameObject extends EventTarget { //EventTarget por causa dos listeners
 
@@ -144,5 +149,74 @@ class Level extends Sprite{
     }
 }
 
+class Player extends Sprite{
+
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+
+        this.level=1;
+    }
+
+
+    draw() {
+        ctx.drawImage(Sprite.imagem,this.x,this.y,this.width,this.height)
+    }
+
+    move(key){
+        this.draw()
+
+        if (this.x>canvas.width){
+            this.x=200
+            this.level++;
+        }
+
+        for (let i =0;i<key.length;i++) {
+            if (key[i] == "d") {
+                this.x += 3;
+            }
+            if (key[i] == "w") {
+                this.y -= 3;
+            }
+            if (key[i]== "a") {
+                this.x -= 3;
+            }
+            if (key[i]== "s") {
+                this.y += 3;
+
+            }
+
+        }
+
+    }
+
+}
+let existe=false;
+addEventListener("keyup", event=>{
+    for (let i =0; i<keys.length;i++){
+
+        if (keys[i] == event.key){
+            existe=false;
+            keys.splice(i,1);
+        }
+    }
+
+
+})
+
+window.addEventListener('keydown',event=>{
+
+    for (let i =0; i<keys.length;i++){
+        if (keys[i] == event.key){
+            existe=true;
+        }
+        else{
+            existe=false
+        }
+    }
+    if (!existe){
+
+        keys.push(event.key);
+    }
+});
 
 
