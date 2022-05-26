@@ -1,8 +1,5 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
-let keys = [];
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
 var tile = {
     width : canvas.width/30,
@@ -133,11 +130,11 @@ class Level extends Sprite{
 
     load(...urlImages){ //método mitico de load a várias imagens
         let i=0;
+
         for(let url of urlImages){
             this.levelsArray.push(new Image());
             this.levelsArray[i].src=url;
             i++;
-            console.log(i);
         }
 
         this.levelsArray.forEach(level =>{
@@ -145,7 +142,6 @@ class Level extends Sprite{
                 window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
             })
         })
-
     }
 }
 
@@ -190,33 +186,5 @@ class Player extends Sprite{
     }
 
 }
-let existe=false;
-addEventListener("keyup", event=>{
-    for (let i =0; i<keys.length;i++){
-
-        if (keys[i] == event.key){
-            existe=false;
-            keys.splice(i,1);
-        }
-    }
-
-
-})
-
-window.addEventListener('keydown',event=>{
-
-    for (let i =0; i<keys.length;i++){
-        if (keys[i] == event.key){
-            existe=true;
-        }
-        else{
-            existe=false
-        }
-    }
-    if (!existe){
-
-        keys.push(event.key);
-    }
-});
 
 
