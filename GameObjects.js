@@ -35,7 +35,7 @@ class Sprite extends GameObject {
     }
 
     draw() {
-        //ctx.drawImage( Sprite.imagem, this.x, this.y, this.width, this.height);
+        ctx.drawImage( Sprite.imagem, this.x, this.y, this.width, this.height);
     }
 
     static load(urlImagem) {
