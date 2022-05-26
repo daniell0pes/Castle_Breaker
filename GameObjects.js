@@ -113,14 +113,13 @@ class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
-        this.imagens = [];
         this.levelsArray = [];
         this.colisionsArray = [];
 
     }
 
     draw(level){
-        ctx.drawImage(level, 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.levelsArray[level], 0, 0, level.width, level.height, this.x, this.y, this.width, this.height);
     }
 
     load(...urlImages){
