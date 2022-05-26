@@ -53,7 +53,7 @@ class AnimatedSprite extends Sprite {
     static numberFrames;
     static numberFramesPerRow;
     static slice;
-    static direction="right";
+    //static direction="right";
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
@@ -107,6 +107,38 @@ class AnimatedSprite extends Sprite {
 
     }
 
+}
+
+class Level extends Sprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+
+        this.imagens = [];
+        this.levelsArray = [];
+        this.colisionsArray = [];
+
+    }
+
+    draw(){
+
+    }
+
+    load(...urlImages){
+
+        for(let url of urlImages){
+            this.levelsArray.push(new Image().src=url);
+        }
+
+        //Sprite.imagem = new Image();
+
+        this.levelsArray.forEach(level =>{
+            level.addEventListener("load", e=>{
+                window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
+            })
+        })
+
+        //Sprite.imagem.src = urlImagem;
+    }
 }
 
 
