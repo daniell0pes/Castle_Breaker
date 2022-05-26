@@ -60,7 +60,6 @@ class AnimatedSprite extends Sprite {
     static numberFrames;
     static numberFramesPerRow;
     static slice;
-    //static direction="right";
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
@@ -157,6 +156,7 @@ class Player extends AnimatedSprite{
         super(x,y,width,height);
 
         this.level=1;
+        this.direction;
     }
 
     move(key){
