@@ -71,9 +71,8 @@ class AnimatedSprite extends Sprite {
         this.sy = 0;
     }
 
-    draw() {
-
-        ctx.drawImage(this.constructor.imagem, this.sx, this.sy, this.constructor.slice.width, this.constructor.slice.height,
+    draw(index) {
+        ctx.drawImage(this.images[index-1], this.sx, this.sy, this.slice.width, this.slice.height,
             this.x, this.y, this.width, this.height);
     }
 
@@ -91,8 +90,31 @@ class AnimatedSprite extends Sprite {
         this.sy = deltaY * this.constructor.slice.height;
     }
 
-    static load(urlImagem, numberFrames, numberFramesPerRow) {
+    load(numberFrames, numberFramesPerRow,...urlImages) {
 
+        let i=0;
+
+        for(let url of urlImages){
+            this.images.push(new Image());
+            this.images[i].src=url;
+            i++;
+        }
+
+        this.images.forEach(image =>{
+            image.addEventListener("load", e=>{
+                //------------------------------------------//
+            this.numberFrames = numberFrames;
+            this.numberFramesPerRow = numberFramesPerRow;
+
+            this.slice = {};
+            this.slice.width = image.width / numberFramesPerRow;
+            let numberRows = Math.ceil(numberFrames / numberFramesPerRow);
+            this.slice.height = image.height / numberRows;
+                //-------------------------------------------//
+            window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
+            })
+        })
+        /*
         this.imagem = new Image(); //instanciar o objeto imagem
 
         this.imagem.src = urlImagem; //dizer que a src da imagem é urlImagem
@@ -110,7 +132,7 @@ class AnimatedSprite extends Sprite {
 
             window.dispatchEvent(new CustomEvent('assetLoad', { detail: this }));
 
-        });
+        });*/
 
     }
 }
@@ -127,10 +149,9 @@ class Level extends Sprite{
         ctx.drawImage(this.images[level-1], 0, 0, this.images[level-1].width,
             this.images[level-1].height, this.x, this.y, this.width, this.height);
     }
-
 }
 
-class Player extends Sprite{
+class Player extends AnimatedSprite{
 
     constructor(x,y,width,height) {
         super(x,y,width,height);
@@ -139,7 +160,7 @@ class Player extends Sprite{
     }
 
     move(key){
-        this.draw()
+        this.draw(1)
 
         if (this.x>canvas.width){
             this.x=200
