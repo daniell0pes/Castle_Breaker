@@ -156,7 +156,7 @@ class Player extends AnimatedSprite{
         super(x,y,width,height);
 
         this.level=1;
-        this.direction;
+        this.direction="";
     }
 
     move(key){

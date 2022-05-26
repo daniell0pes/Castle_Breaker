@@ -9,8 +9,6 @@ addEventListener("keyup", event=>{
             keys.splice(i,1);
         }
     }
-
-
 })
 
 window.addEventListener('keydown',event=>{
@@ -24,7 +22,6 @@ window.addEventListener('keydown',event=>{
         }
     }
     if (!existe){
-
         keys.push(event.key);
     }
 });
