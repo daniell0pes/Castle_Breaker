@@ -24,11 +24,10 @@ class GameObject extends EventTarget { //EventTarget por causa dos listeners
 }
 
 class Sprite extends GameObject {
-
-    static imagem;
-
     constructor( x, y, width, height ) {
         super(x,y,width, height);
+
+        this.images=[];
     }
 
     update() {
@@ -36,17 +35,23 @@ class Sprite extends GameObject {
     }
 
     draw() {
-        //ctx.drawImage( Sprite.imagem, this.x, this.y, this.width, this.height);
-    }
+        ctx.drawImage(this.images[0], this.x, this.y, this.width, this.height); //default para uma imagem, redefinir nas classes derivadas caso seja necessarias mais,
+    }                                                                       //adicionar argumentos para alterar indice de array
 
-    static load(urlImagem) {
-        Sprite.imagem = new Image();
+    load(...urlImages){ //método mitico de load a várias imagens
+        let i=0;
 
-        Sprite.imagem.addEventListener( "load", e=> {
-            window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
-        });
+        for(let url of urlImages){
+            this.images.push(new Image());
+            this.images[i].src=url;
+            i++;
+        }
 
-        Sprite.imagem.src = urlImagem;
+        this.images.forEach(image =>{
+            image.addEventListener("load", e=>{
+                window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
+            })
+        })
     }
 }
 
@@ -108,38 +113,21 @@ class AnimatedSprite extends Sprite {
         });
 
     }
-
 }
 
 class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
-        this.levelsArray = [];
         this.colisionsArray = [];
 
     }
 
     draw(level){
-        ctx.drawImage(this.levelsArray[level-1], 0, 0, this.levelsArray[level-1].width,
-            this.levelsArray[level-1].height, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.images[level-1], 0, 0, this.images[level-1].width,
+            this.images[level-1].height, this.x, this.y, this.width, this.height);
     }
 
-    load(...urlImages){ //método mitico de load a várias imagens
-        let i=0;
-
-        for(let url of urlImages){
-            this.levelsArray.push(new Image());
-            this.levelsArray[i].src=url;
-            i++;
-        }
-
-        this.levelsArray.forEach(level =>{
-            level.addEventListener("load", e=>{
-                window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
-            })
-        })
-    }
 }
 
 class Player extends Sprite{
@@ -148,11 +136,6 @@ class Player extends Sprite{
         super(x,y,width,height);
 
         this.level=1;
-    }
-
-
-    draw() {
-        ctx.drawImage(Sprite.imagem,this.x,this.y,this.width,this.height)
     }
 
     move(key){

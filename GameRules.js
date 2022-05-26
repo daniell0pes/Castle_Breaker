@@ -3,6 +3,3 @@ const tiles = {
     height:canvas.height/20
 
 }
-
-
-c
