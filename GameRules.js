@@ -4,7 +4,7 @@ const tiles = {
 
 }
 
-function idle_setter(){ //gera problemas
+function idle_setter(){
     switch(player.direction){
         case "down":
             player.state = 1;

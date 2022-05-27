@@ -1,7 +1,7 @@
 let keys = [];
 
 let existe=false;
-addEventListener("keyup", event=>{
+addEventListener("keyup", function(e){
     for (let i =0; i<keys.length;i++){
 
         if (keys[i] == event.key){
@@ -9,11 +9,12 @@ addEventListener("keyup", event=>{
             keys.splice(i,1);
         }
     }
-    //idle_setter()
+    if(e.key==="a" || e.key==="d" || e.key==="w" || e.key==="s") {
+        idle_setter()
+    }
 })
 
-window.addEventListener('keydown',event=>{
-
+window.addEventListener('keydown',function(e){
     for (let i =0; i<keys.length;i++){
         if (keys[i] == event.key){
             existe=true;

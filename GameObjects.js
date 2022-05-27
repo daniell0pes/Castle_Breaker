@@ -157,7 +157,7 @@ class Player extends AnimatedSprite{
 
         this.level=1;
         this.direction="right";
-        this.state=3;
+        this.state=3; //animação do jogador consoante a sua direção
     }
 
     move(key){
@@ -170,22 +170,25 @@ class Player extends AnimatedSprite{
         }
 
         for (let i =0;i<key.length;i++) {
-            if (key[i] == "d") {
-                this.direction="right";
-                this.x += 3;
+            if (key[i] == "s") {
+                this.direction="down";
+                player.state = 5;
+                this.y += 6;
             }
-            if (key[i] == "w") {
-                this.direction="up"
-                this.y -= 3;
-            }
-            if (key[i]== "a") {
+            if (key[i] == "a") {
                 this.direction="left"
-                this.x -= 3;
+                player.state = 6;
+                this.x -= 6;
             }
-            if (key[i]== "s") {
-                this.direction="down"
-                this.y += 3;
-
+            if (key[i]== "d") {
+                this.direction="right"
+                player.state = 7;
+                this.x += 6;
+            }
+            if (key[i]== "w") {
+                this.direction="up"
+                player.state = 8;
+                this.y -= 6;
             }
 
         }
