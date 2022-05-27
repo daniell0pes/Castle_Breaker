@@ -1,6 +1,6 @@
 const map = new Level(0,0,canvas.width,canvas.height);
 const foreground = new Level(0,0,canvas.width,canvas.height);
-const player = new Player(220,450,150,150);
+const player = new Player(220,450,100,100);
 
 player.load(30,6,"Assets/Homer/idle/idle_down.png", "Assets/Homer/idle/idle_left.png",
     "Assets/Homer/idle/idle_right.png", "Assets/Homer/idle/idle_up.png", 'Assets/Homer/walk/walk_down.png', 'Assets/Homer/walk/walk_left.png', 'Assets/Homer/walk/walk_right.png',
@@ -18,6 +18,7 @@ function animate(){
     map.draw(player.level);
     player.move(keys);
     foreground.draw(player.level)
+        DrawstructuresCollision();
     }, 1000/fps);
 }
 

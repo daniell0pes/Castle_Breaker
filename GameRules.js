@@ -26,22 +26,31 @@ function idle_setter(){
 
 
 function structuresCollision(X,Y,Width,Height){
-    chooseLevel(player.level);
-
+    let levelNow = [];
+    for(let i = 0; i<map.colisionsArray.length;i+=30){
+        levelNow.push(map.colisionsArray.slice(i,i+30));
+    }
     let x=0
     let y=0
 
-    for (let i =0;i<=levelNow.length;i++){
-        for (let f=0;f<=levelNow[0].length;f++){
+    for (let i =0;i<levelNow.length;i++){
+        for (let f=0;f<levelNow[0].length;f++){
 
             if (x>canvas.width){
 
                 y+=tiles.height
                 x=0
             }
-            if (i<20&&f<30){
-                if(levelNow[i][f] == 10) {
+            if(levelNow[i][f] === 20) {
+                if(X < x + tiles.width-20 &&
+                    X + Width > x &&
+                    Y < y + tiles.height-12 &&
+                    Y + Height > y){
+                    player.level++;
+                }
+            }
 
+                if(levelNow[i][f] == 10) {
 
                     if(X < x + tiles.width-20 &&
                         X + Width > x &&
@@ -50,10 +59,45 @@ function structuresCollision(X,Y,Width,Height){
                         return true;
                     }
 
+                }
+
+            x+=tiles.width
+
+        }
+
+    }
+
+}
+
+function DrawstructuresCollision(){
+    let levelNow = [];
+    for(let i = 0; i<map.colisionsArray.length;i+=30){
+        levelNow.push(map.colisionsArray.slice(i,i+30));
+    }
+
+    let x=0
+    let y=0
+
+    for (let i =0;i<levelNow.length;i++){
+        for (let f=0;f<levelNow[0].length;f++){
+
+            if (x>canvas.width){
+
+                y+=tiles.height
+                x=0
+            }
+
+            if(levelNow[i][f] === 20) {
+                ctx.fillRect(x,y,tiles.width,tiles.height)
+            }
+
+                if(levelNow[i][f] == 10) {
+
+                    ctx.fillStyle='red';
+                    ctx.fillRect(x,y,tiles.width,tiles.height);
 
 
-
-                }}
+                }
 
             x+=tiles.width
 

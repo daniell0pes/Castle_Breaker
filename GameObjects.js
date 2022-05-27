@@ -150,10 +150,9 @@ class Level extends Sprite{
 
         this.colisionsArray = levels[level-1];
     }
-
 }
 
-class Player extends Sprite{
+class Player extends AnimatedSprite{
 
     constructor(x,y,width,height) {
         super(x,y,width,height);
