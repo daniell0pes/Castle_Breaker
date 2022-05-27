@@ -144,10 +144,13 @@ class Level extends Sprite{
 
     }
 
-    draw(level){
-        ctx.drawImage(this.images[level-1], 0, 0, this.images[level-1].width,
-            this.images[level-1].height, this.x, this.y, this.width, this.height);
+    draw(level) {
+        ctx.drawImage(this.images[level - 1], 0, 0, this.images[level - 1].width,
+            this.images[level - 1].height, this.x, this.y, this.width, this.height);
+
+        this.colisionsArray = levels[level-1];
     }
+
 }
 
 class Player extends Sprite{

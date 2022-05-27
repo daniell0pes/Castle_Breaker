@@ -4,7 +4,7 @@ let existe=false;
 addEventListener("keyup", function(e){
     for (let i =0; i<keys.length;i++){
 
-        if (keys[i] == event.key){
+        if (keys[i] == e.key){
             existe=false;
             keys.splice(i,1);
         }
@@ -16,7 +16,7 @@ addEventListener("keyup", function(e){
 
 window.addEventListener('keydown',function(e){
     for (let i =0; i<keys.length;i++){
-        if (keys[i] == event.key){
+        if (keys[i] == e.key){
             existe=true;
         }
         else{
@@ -24,6 +24,6 @@ window.addEventListener('keydown',function(e){
         }
     }
     if (!existe){
-        keys.push(event.key);
+        keys.push(e.key);
     }
 });
