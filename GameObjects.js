@@ -150,7 +150,7 @@ class Level extends Sprite{
     }
 }
 
-class Player extends AnimatedSprite{
+class Player extends Sprite{
 
     constructor(x,y,width,height) {
         super(x,y,width,height);
@@ -170,22 +170,22 @@ class Player extends AnimatedSprite{
         }
 
         for (let i =0;i<key.length;i++) {
-            if (key[i] == "s") {
+            if (key[i] == "s" && !structuresCollision(this.x,this.y +6,this.width,this.height)) {
                 this.direction="down";
                 player.state = 5;
                 this.y += 6;
             }
-            if (key[i] == "a") {
+            if (key[i] == "a" && !structuresCollision(this.x -6,this.y,this.width,this.height)) {
                 this.direction="left"
                 player.state = 6;
                 this.x -= 6;
             }
-            if (key[i]== "d") {
+            if (key[i]== "d" && !structuresCollision(this.x+6,this.y,this.width,this.height)) {
                 this.direction="right"
                 player.state = 7;
                 this.x += 6;
             }
-            if (key[i]== "w") {
+            if (key[i]== "w" && !structuresCollision(this.x,this.y -6,this.width,this.height)) {
                 this.direction="up"
                 player.state = 8;
                 this.y -= 6;
