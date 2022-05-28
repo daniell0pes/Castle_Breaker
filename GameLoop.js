@@ -18,7 +18,7 @@ function animate(){
     map.draw(player.level);
     player.move(keys);
     foreground.draw(player.level)
-        DrawstructuresCollision();
+       DrawstructuresCollision();
     }, 1000/fps);
 }
 

@@ -156,7 +156,6 @@ class Player extends AnimatedSprite{
 
     constructor(x,y,width,height) {
         super(x,y,width,height);
-
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
