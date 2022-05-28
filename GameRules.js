@@ -38,7 +38,7 @@ function structuresCollision(X,Y,Width,Height){
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
 
-            if (x===canvas.width){
+            if (x>=canvas.width){
 
                 y+=tiles.height
                 x=0
@@ -82,7 +82,7 @@ function DrawstructuresCollision(){
 
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
-            if (x===canvas.width){
+            if (x>=canvas.width){
 
                 y+=tiles.height
                 x=0
