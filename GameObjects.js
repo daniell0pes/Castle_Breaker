@@ -113,25 +113,6 @@ class AnimatedSprite extends Sprite {
             window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
             })
         })
-        /*
-        this.imagem = new Image(); //instanciar o objeto imagem
-
-        this.imagem.src = urlImagem; //dizer que a src da imagem é urlImagem
-
-        this.imagem.addEventListener('load', () => {
-
-            this.numberFrames = numberFrames;
-            this.numberFramesPerRow = numberFramesPerRow;
-
-            this.slice = {};
-            this.slice.width = this.imagem.width / numberFramesPerRow;
-
-            let numberRows = Math.ceil(numberFrames / numberFramesPerRow);
-            this.slice.height = this.imagem.height / numberRows;
-
-            window.dispatchEvent(new CustomEvent('assetLoad', { detail: this }));
-
-        });*/
 
     }
 }
@@ -171,22 +152,22 @@ class Player extends AnimatedSprite{
         }
 
         for (let i =0;i<key.length;i++) {
-            if (key[i] == "s" && !structuresCollision(this.x,this.y +6,this.width,this.height)) {
+            if (key[i] == "s" && !structuresCollision(this.x,this.y +6,this.width-20,this.height-35)) {
                 this.direction="down";
                 player.state = 5;
                 this.y += 6;
             }
-            if (key[i] == "a" && !structuresCollision(this.x -6,this.y,this.width,this.height)) {
+            if (key[i] == "a" && !structuresCollision(this.x -6,this.y,this.width-20,this.height-35)) {
                 this.direction="left"
                 player.state = 6;
                 this.x -= 6;
             }
-            if (key[i]== "d" && !structuresCollision(this.x+6,this.y,this.width,this.height)) {
+            if (key[i]== "d" && !structuresCollision(this.x+6,this.y,this.width-20,this.height-35)) {
                 this.direction="right"
                 player.state = 7;
                 this.x += 6;
             }
-            if (key[i]== "w" && !structuresCollision(this.x,this.y -6,this.width,this.height)) {
+            if (key[i]== "w" && !structuresCollision(this.x,this.y -6,this.width-20,this.height-35)) {
                 this.direction="up"
                 player.state = 8;
                 this.y -= 6;

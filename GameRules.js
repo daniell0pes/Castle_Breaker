@@ -31,7 +31,6 @@ function structuresCollision(X,Y,Width,Height){
         levelNow.push(map.colisionsArray.slice(i,i+30));
     }
 
-
     let x=0
     let y=0
 
@@ -71,6 +70,8 @@ function structuresCollision(X,Y,Width,Height){
 
 }
 
+
+//para propósito de testes
 function DrawstructuresCollision(){
     let levelNow = [];
     for(let i = 0; i<map.colisionsArray.length;i+=30){
