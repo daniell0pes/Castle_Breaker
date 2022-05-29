@@ -3,6 +3,7 @@ const tiles = {
     height:canvas.height/20
 
 }
+let levelNow = []
 
 function idle_setter(){
     switch(player.direction){
@@ -23,37 +24,42 @@ function idle_setter(){
         break;
     }
 }
-
-function generateCollision(){
+function generateCollision() {
+    levelNow=[]
+    console.log(map.colisionsArray.length)
     for(let i = 0; i<map.colisionsArray.length;i+=30){
-        map.levelNow.push(map.colisionsArray.slice(i,i+30));
+        levelNow.push(map.colisionsArray.slice(i,i+30));
     }
 }
+
 
 
 function structuresCollision(X,Y,Width,Height){
     let x=0
     let y=0
 
-    for (let i =0;i<map.levelNow.length;i++){
-        for (let f=0;f<map.levelNow[0].length;f++){
+    for (let i =0;i<levelNow.length;i++){
+        for (let f=0;f<levelNow[0].length;f++){
 
-            if (x>=canvas.width){
+            if (x>=canvas.width-1){
 
                 y+=tiles.height
                 x=0
             }
-            if(map.levelNow[i][f] === 20) {
+            if(levelNow[i][f] === 20) {
                 if(X < x + tiles.width-20 &&
                     X + Width > x &&
                     Y < y + tiles.height-12 &&
                     Y + Height > y){
+                    console.log("aqui")
                     player.level++;
-                    generateCollision();
+                    map.init(player.level)
+                    generateCollision()
+
                 }
             }
 
-                if(map.levelNow[i][f] == 10) {
+                if(levelNow[i][f] == 10) {
 
                     if(X < x + tiles.width-20 &&
                         X + Width > x &&
@@ -79,19 +85,20 @@ function DrawstructuresCollision(){
     let x=0
     let y=0
 
-    for (let i =0;i<map.levelNow.length;i++){
-        for (let f=0;f<map.levelNow[0].length;f++){
-            if (x>=canvas.width){
+    for (let i =0;i<levelNow.length;i++){
+        for (let f=0;f<levelNow[0].length;f++){
+            if (x>=canvas.width-1){
 
                 y+=tiles.height
                 x=0
             }
 
-            if(map.levelNow[i][f] === 20) {
+            if(levelNow[i][f] === 20) {
+                ctx.fillStyle="blue"
                 ctx.fillRect(x,y,tiles.width,tiles.height)
             }
 
-                if(map.levelNow[i][f] == 10) {
+                if(levelNow[i][f] == 10) {
 
                     ctx.fillStyle='red';
                     ctx.fillRect(x,y,tiles.width,tiles.height);

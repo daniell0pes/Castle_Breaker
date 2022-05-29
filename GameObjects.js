@@ -121,14 +121,19 @@ class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
-        this.levelNow = [];
-        this.colisionsArray = [];
+
+        this.colisionsArray = levels[0];
     }
 
     draw(level) {
+
+
         ctx.drawImage(this.images[level - 1], 0, 0, this.images[level - 1].width,
             this.images[level - 1].height, this.x, this.y, this.width, this.height);
+        //this.colisionsArray = levels[level-1];
 
+    }
+    init(level){
         this.colisionsArray = levels[level-1];
     }
 }
@@ -151,23 +156,25 @@ class Player extends AnimatedSprite{
             this.level++;
         }
 
+        //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
+
         for (let i =0;i<key.length;i++) {
-            if (key[i] == "s" && !structuresCollision(this.x,this.y +6,this.width-20,this.height-35)) {
+            if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75)) {
                 this.direction="down";
                 player.state = 5;
                 this.y += 6;
             }
-            if (key[i] == "a" && !structuresCollision(this.x -6,this.y,this.width-20,this.height-35)) {
+            if (key[i] == "a" && !structuresCollision(this.x+37-6,this.y+37,this.width-75,this.height-75)) {
                 this.direction="left"
                 player.state = 6;
                 this.x -= 6;
             }
-            if (key[i]== "d" && !structuresCollision(this.x+6,this.y,this.width-20,this.height-35)) {
+            if (key[i]== "d" && !structuresCollision(this.x+37+6,this.y+37,this.width-75,this.height-75)) {
                 this.direction="right"
                 player.state = 7;
                 this.x += 6;
             }
-            if (key[i]== "w" && !structuresCollision(this.x,this.y -6,this.width-20,this.height-35)) {
+            if (key[i]== "w" && !structuresCollision(this.x+37,this.y+37-6,this.width-75,this.height-75)) {
                 this.direction="up"
                 player.state = 8;
                 this.y -= 6;

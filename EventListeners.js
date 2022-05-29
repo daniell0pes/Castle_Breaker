@@ -27,3 +27,7 @@ window.addEventListener('keydown',function(e){
         keys.push(e.key);
     }
 });
+
+window.addEventListener("click",function (e) {
+    console.log("shoot")
+} )
