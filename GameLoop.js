@@ -10,6 +10,8 @@ player.load(30,6,"Assets/Homer/idle/idle_down.png", "Assets/Homer/idle/idle_left
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
 
+
+
 const fps=30;
 function animate(){
     setTimeout(function () {

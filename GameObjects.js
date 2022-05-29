@@ -122,6 +122,7 @@ class Level extends Sprite{
         super(x,y,width,height);
 
         this.colisionsArray = [];
+        this.levelNow = [];
 
     }
 
