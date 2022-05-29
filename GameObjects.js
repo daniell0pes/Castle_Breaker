@@ -121,9 +121,8 @@ class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
-        this.colisionsArray = [];
         this.levelNow = [];
-
+        this.colisionsArray = [];
     }
 
     draw(level) {
