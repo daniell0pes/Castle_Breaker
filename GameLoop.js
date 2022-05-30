@@ -21,6 +21,10 @@ function animate(){
 
     player.move(keys);
     foreground.draw(player.level)
+    player.attacks.forEach(attack =>{
+
+        attack.draw()
+    })
        DrawstructuresCollision();
     }, 1000/fps);
 }

@@ -27,7 +27,13 @@ window.addEventListener('keydown',function(e){
         keys.push(e.key);
     }
 });
-
+let attackTimeOut = false;
 window.addEventListener("click",function (e) {
-    console.log("shoot")
+   if (!attackTimeOut){
+       player.attack()
+       attackTimeOut=true;
+   }
+    setTimeout(() => {
+      attackTimeOut = false;
+    }, 500)
 } )

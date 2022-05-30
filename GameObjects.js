@@ -145,6 +145,7 @@ class Player extends AnimatedSprite{
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
+        this.attacks = []
     }
 
     move(key){
@@ -182,6 +183,24 @@ class Player extends AnimatedSprite{
 
         }
 
+    }
+
+    attack(){
+
+        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+    }
+
+}
+
+class Attack extends GameObject{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+
+    this.damage=10;
+
+    }
+    draw() {
+        ctx.fillRect(this.x,this.y,25,100)
     }
 
 }
