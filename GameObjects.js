@@ -113,7 +113,6 @@ class AnimatedSprite extends Sprite {
             window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
             })
         })
-
     }
 }
 
@@ -191,7 +190,8 @@ class playerStance extends Player{
     }
 
     attack(){
-        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+        this.attacks.push(new Attack(player.x,player.y,this.width,this.height))
+        attackDirection(this.attacks[this.attacks.length-1]);
     }
 }
 
