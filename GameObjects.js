@@ -152,10 +152,7 @@ class Player extends AnimatedSprite{
         this.draw(this.state)
         this.update();
 
-        if (this.x>canvas.width){
-            this.x=200
-            this.level++;
-        }
+
 
         //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
@@ -186,21 +183,31 @@ class Player extends AnimatedSprite{
     }
 
     attack(){
-
-        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+        this.attacks=[]
+        console.log(player.state)
+        this.attacks.push(new Attack(this.x,this.y,25,100))
+        attackDirection(this.attacks[this.attacks.length-1])
     }
 
 }
 
 class Attack extends GameObject{
     constructor(x,y,width,height) {
+
+
         super(x,y,width,height);
 
     this.damage=10;
 
+
+
+
+
+
     }
     draw() {
-        ctx.fillRect(this.x,this.y,25,100)
+        ctx.fillStyle="yellow"
+        ctx.fillRect(this.x,this.y,this.width,this.height)
     }
 
 }

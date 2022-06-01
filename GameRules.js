@@ -24,6 +24,26 @@ function idle_setter(){
         break;
     }
 }
+
+function attackDirection(attack) {
+    if (player.direction=="right"){
+        attack.x += player.width
+    }
+
+    if (player.direction=="up"){
+        let aux= attack.height
+        attack.height=attack.width
+        attack.width=aux
+        attack.x+=37
+    }
+    if (player.direction=="down"){
+        let aux= attack.height
+        attack.height=attack.width
+        attack.width=aux
+        attack.y+=115
+        attack.x+=37
+    }
+}
 function generateCollision() {
     levelNow=[]
     console.log(map.colisionsArray.length)
