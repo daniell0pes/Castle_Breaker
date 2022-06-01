@@ -56,11 +56,6 @@ class Sprite extends GameObject {
 }
 
 class AnimatedSprite extends Sprite {
-
-    static numberFrames;
-    static numberFramesPerRow;
-    static slice;
-
     constructor(x, y, width, height) {
         super(x, y, width, height);
 
@@ -68,6 +63,11 @@ class AnimatedSprite extends Sprite {
 
         this.sx = 0;
         this.sy = 0;
+
+        this.numberFrames=0;
+        this.numberFramesPerRow=0;
+        this.slice=0;
+
     }
 
     draw(index) {
@@ -89,17 +89,17 @@ class AnimatedSprite extends Sprite {
         this.sy = deltaY * this.slice.height;
     }
 
-    load(numberFrames, numberFramesPerRow,...urlImages) {
+    load(numberFrames, numberFramesPerRow,array,...urlImages) {
 
         let i=0;
 
         for(let url of urlImages){
-            this.images.push(new Image());
-            this.images[i].src=url;
+            array.push(new Image());
+            array[i].src=url;
             i++;
         }
 
-        this.images.forEach(image =>{
+        array.forEach(image =>{
             image.addEventListener("load", e=>{
                 //------------------------------------------//
             this.numberFrames = numberFrames;
@@ -120,8 +120,6 @@ class AnimatedSprite extends Sprite {
 class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
-
-
         this.colisionsArray = levels[0];
     }
 
@@ -145,14 +143,16 @@ class Player extends AnimatedSprite{
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
-        this.attacks = []
     }
 
     move(key){
         this.draw(this.state)
         this.update();
 
-
+        if (this.x>canvas.width){
+            this.x=200
+            this.level++;
+        }
 
         //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
@@ -182,32 +182,29 @@ class Player extends AnimatedSprite{
 
     }
 
-    attack(){
-        this.attacks=[]
-        console.log(player.state)
-        this.attacks.push(new Attack(this.x,this.y,25,100))
-        attackDirection(this.attacks[this.attacks.length-1])
+}
+
+class playerStance extends Player{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+        this.attacks=[];
     }
 
+    attack(){
+        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+    }
 }
+
 
 class Attack extends GameObject{
     constructor(x,y,width,height) {
-
-
         super(x,y,width,height);
 
     this.damage=10;
 
-
-
-
-
-
     }
-    draw() {
-        ctx.fillStyle="yellow"
-        ctx.fillRect(this.x,this.y,this.width,this.height)
+    drawCollision() {
+        ctx.fillRect(this.x,this.y,25,100)
     }
 
 }
