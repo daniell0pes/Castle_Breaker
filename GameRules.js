@@ -44,6 +44,17 @@ function attackDirection(attack) {
         attack.x+=37
     }
 }
+
+function playerStateSetter(attackMode){
+    if(attackMode){
+        playerattack.draw(player.state);
+        playerattack.update();
+        console.log("Aqui: " + player.state)
+    }else{
+        player.move(keys)
+    }
+}
+
 function generateCollision() {
     levelNow=[]
     console.log(map.colisionsArray.length)
@@ -97,7 +108,6 @@ function structuresCollision(X,Y,Width,Height){
     }
 
 }
-
 
 //para propósito de testes
 function DrawstructuresCollision(){
