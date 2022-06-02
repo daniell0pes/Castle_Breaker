@@ -49,7 +49,7 @@ class Sprite extends GameObject {
 
         this.images.forEach(image =>{
             image.addEventListener("load", e=>{
-                window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
+                window.dispatchEvent( new CustomEvent('assetLoad', { detail: e }))
             })
         })
     }
@@ -110,7 +110,7 @@ class AnimatedSprite extends Sprite {
             let numberRows = Math.ceil(numberFrames / numberFramesPerRow);
             this.slice.height = image.height / numberRows;
                 //-------------------------------------------//
-            window.dispatchEvent( new CustomEvent('assetLoad', { detail: this }))
+            window.dispatchEvent( new CustomEvent('assetLoad', { detail: e }))
             })
         })
     }
@@ -153,7 +153,7 @@ class Player extends AnimatedSprite{
             this.level++;
         }
 
-        ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
+       // ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
         for (let i =0;i<key.length;i++) {
             if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75)) {
@@ -198,7 +198,7 @@ class Npc extends Sprite{
 
 class Enemy extends Sprite{
     constructor(x,y,width,height) {
-        super();
+        super(x,y,width,height);
     }
 }
 

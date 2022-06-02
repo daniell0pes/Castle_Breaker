@@ -57,7 +57,20 @@ function playerStateSetter(attackMode){
         player.move(keys)
     }
 }
+function generateCharacters() {
+   Npcs.splice(0,1)
+    if (player.level==1){
+        let img = new Image(150,150)
+        img.src="Assets/Donut.png"
+        Npcs.push(new Npc((canvas.width/2)-30,canvas.height/2,150,150))
+        Npcs[0].images.push(img);
+    }
+}
 
+function generateMap() {
+    generateCollision()
+    generateCharacters()
+}
 function generateCollision() {
     levelNow=[]
     console.log(map.colisionsArray.length)
@@ -94,7 +107,7 @@ function structuresCollision(X,Y,Width,Height){
                     console.log("aqui")
                     player.level++;
                     map.init(player.level)
-                    generateCollision()
+                    generateMap()
 
                 }
             }
@@ -103,7 +116,7 @@ function structuresCollision(X,Y,Width,Height){
                     console.log("aqui")
                     player.level+=2;
                     map.init(player.level)
-                    generateCollision()
+                    generateMap()
 
                 }
             }
