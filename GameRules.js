@@ -66,27 +66,42 @@ function generateCollision() {
     }
 }
 
+//Função que testa as colisões entre o jogador ou qualquer outro objeto que se mande o X,Y,WIDTH e Height com a posição do tile
+//que se quer, esta função tem o propósito de eliminar repetição de código.
+function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
+    if(X < tileX + tiles.width-20 &&
+        X + Width > tileX &&
+        Y < tileY + tiles.height-12 &&
+        Y + Height > tileY){
 
-
+            return true;
+    }
+}
 function structuresCollision(X,Y,Width,Height){
-    let x=0
-    let y=0
+    let tileX=0
+    let tileY=0
 
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
 
-            if (x>=canvas.width-1){
+            if (tileX>=canvas.width-1){
 
-                y+=tiles.height
-                x=0
+                tileY+=tiles.height
+                tileX=0
             }
             if(levelNow[i][f] === 20) {
-                if(X < x + tiles.width-20 &&
-                    X + Width > x &&
-                    Y < y + tiles.height-12 &&
-                    Y + Height > y){
+                if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
                     console.log("aqui")
                     player.level++;
+                    map.init(player.level)
+                    generateCollision()
+
+                }
+            }
+            if(levelNow[i][f] === 30) {
+                if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
+                    console.log("aqui")
+                    player.level+=2;
                     map.init(player.level)
                     generateCollision()
 
@@ -95,16 +110,15 @@ function structuresCollision(X,Y,Width,Height){
 
                 if(levelNow[i][f] == 10) {
 
-                    if(X < x + tiles.width-20 &&
-                        X + Width > x &&
-                        Y < y + tiles.height-12 &&
-                        Y + Height > y){
+                    if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
                         return true;
                     }
 
                 }
 
-            x+=tiles.width
+
+
+            tileX+=tiles.width
 
         }
 
@@ -128,6 +142,10 @@ function DrawstructuresCollision(){
 
             if(levelNow[i][f] === 20) {
                 ctx.fillStyle="blue"
+                ctx.fillRect(x,y,tiles.width,tiles.height)
+            }
+            if(levelNow[i][f] === 30) {
+                ctx.fillStyle="yellow"
                 ctx.fillRect(x,y,tiles.width,tiles.height)
             }
 

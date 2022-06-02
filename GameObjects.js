@@ -153,7 +153,7 @@ class Player extends AnimatedSprite{
             this.level++;
         }
 
-        //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
+        ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
         for (let i =0;i<key.length;i++) {
             if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75)) {
@@ -181,6 +181,25 @@ class Player extends AnimatedSprite{
 
     }
 
+}
+
+// Non Playable Character
+class Npc extends Sprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+
+    }
+
+    update() {
+        this.draw()
+    }
+
+}
+
+class Enemy extends Sprite{
+    constructor(x,y,width,height) {
+        super();
+    }
 }
 
 class playerStance extends Player{
