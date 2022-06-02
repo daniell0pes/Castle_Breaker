@@ -95,12 +95,13 @@ class AnimatedSprite extends Sprite {
 
         for(let url of urlImages){
             array.push(new Image());
-            array[i].src=url;
+                array[i].src=url;
             i++;
         }
 
         array.forEach(image =>{
             image.addEventListener("load", e=>{
+                console.log("loaded" + image.src)
                 //------------------------------------------//
             this.numberFrames = numberFrames;
             this.numberFramesPerRow = numberFramesPerRow;
@@ -153,7 +154,7 @@ class Player extends AnimatedSprite{
             this.level++;
         }
 
-       // ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
+        //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
         for (let i =0;i<key.length;i++) {
             if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75)) {
@@ -198,7 +199,7 @@ class Npc extends Sprite{
 
 class Enemy extends Sprite{
     constructor(x,y,width,height) {
-        super(x,y,width,height);
+        super();
     }
 }
 
