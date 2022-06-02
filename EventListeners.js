@@ -31,8 +31,6 @@ window.addEventListener('keydown',function(e){
 let attackTimeOut = false;
 window.addEventListener("click",function (e) {
    if (!attackTimeOut){
-       playerattack.attack()
-       attackTimeOut=true;
 
 
        if (e.clientY<player.y+player.height/2 && e.clientX>player.x-30 && e.clientX<player.x+player.width +30){
@@ -54,6 +52,8 @@ window.addEventListener("click",function (e) {
           player.direction="left";
            player.state = 2;
        }
+       playerattack.attack()
+       attackTimeOut=true;
 
    }
     setTimeout(() => {
