@@ -42,7 +42,10 @@ function attackDirection(attack) {
         attack.width=aux
         attack.y+=115
         attack.x+=37
+
     }
+
+
 }
 
 function playerStateSetter(attackMode){

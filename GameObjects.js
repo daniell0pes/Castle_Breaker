@@ -190,7 +190,7 @@ class playerStance extends Player{
     }
 
     attack(){
-        this.attacks.push(new Attack(player.x,player.y,this.width,this.height))
+        this.attacks.push(new Attack(player.x,player.y,25,100))
         attackDirection(this.attacks[this.attacks.length-1]);
     }
 }
@@ -204,7 +204,7 @@ class Attack extends GameObject{
 
     }
     drawCollision() {
-        ctx.fillRect(this.x,this.y,25,100)
+        ctx.fillRect(this.x,this.y,this.width,this.height)
     }
 
 }
