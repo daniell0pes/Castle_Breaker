@@ -143,6 +143,7 @@ class Player extends AnimatedSprite{
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
+        this.inventory=[];
     }
 
     move(key){
