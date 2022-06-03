@@ -184,6 +184,23 @@ class Player extends AnimatedSprite{
 
 }
 
+class playerStance extends Player{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+        this.attacks=[];
+    }
+
+    draw(index) {
+        ctx.drawImage(this.images[index-1], this.sx, this.sy, this.slice.width, this.slice.height,
+            player.x, player.y, this.width, this.height);
+    }
+
+    attack(){
+        this.attacks.push(new Attack(player.x,player.y,25,100))
+        attackDirection(this.attacks[this.attacks.length-1]);
+    }
+}
+
 // Non Playable Character
 class Npc extends Sprite{
     constructor(x,y,width,height) {
@@ -203,22 +220,7 @@ class Enemy extends Sprite{
     }
 }
 
-class playerStance extends Player{
-    constructor(x,y,width,height) {
-        super(x,y,width,height);
-        this.attacks=[];
-    }
 
-    draw(index) {
-        ctx.drawImage(this.images[index-1], this.sx, this.sy, this.slice.width, this.slice.height,
-            player.x, player.y, this.width, this.height);
-    }
-
-    attack(){
-        this.attacks.push(new Attack(player.x,player.y,25,100))
-        attackDirection(this.attacks[this.attacks.length-1]);
-    }
-}
 
 
 class Attack extends GameObject{

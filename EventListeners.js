@@ -55,8 +55,11 @@ window.addEventListener("click",function (e) {
        playerattack.attack()
        attackTimeOut=true;
 
+       setTimeout(() => {
+           attackTimeOut = false;
+           playerattack.attacks.splice(0,1);
+       }, 500)
+
    }
-    setTimeout(() => {
-      attackTimeOut = false;
-    }, 500)
+
 } )

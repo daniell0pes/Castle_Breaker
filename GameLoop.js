@@ -24,15 +24,15 @@ function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     map.draw(player.level);
 
-    //player.move(keys);
     playerStateSetter(attackTimeOut);
     Npcs.forEach(npc=>{
         npc.draw();
     })
     foreground.draw(player.level)
+    /*
     playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()
-    })
+    })*/
        //DrawstructuresCollision();
     }, 1000/fps);
 }
