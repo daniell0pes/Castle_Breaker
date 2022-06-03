@@ -33,7 +33,7 @@ function animate(){
     playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         //attack.drawCollision()
     })
-        enemy.chase(Math.atan2(player.y-enemy.y,player.x - enemy.x))
+        //enemy.chase(Math.atan2(player.y-enemy.y,player.x - enemy.x))
 
         Hp()
        //DrawstructuresCollision();
