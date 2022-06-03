@@ -28,6 +28,10 @@ window.addEventListener('keydown',function(e){
     }
 });
 
+window.addEventListener('keypress',function (e){
+        inventory.allowInventory(e.key);
+})
+
 let attackTimeOut = false;
 window.addEventListener("click",function (e) {
    if (!attackTimeOut){

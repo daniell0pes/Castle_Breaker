@@ -203,6 +203,26 @@ class playerStance extends Player{
     }
 }
 
+class Inventory extends Sprite {
+    constructor(x, y, width, height) {
+        super(x, y, width, height);
+
+        this.activated = false;
+    }
+
+    allowInventory(key) {
+        if(key==="i"){
+            this.activated = !this.activated;
+        }
+    }
+
+    drawInventory(){
+        if (this.activated) {
+            this.draw();
+        }
+    }
+}
+
 // Non Playable Character
 class Npc extends AnimatedSprite{
     constructor(x,y,width,height) {
