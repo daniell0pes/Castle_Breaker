@@ -57,19 +57,24 @@ function playerStateSetter(attackMode){
     }
 }
 
+
 function generateCharacters() {
-   Npcs.splice(0,1)
-    if (player.level==1){
+    //Npcs.splice(0,1)
+    if (player.level == 1) {
+        /*
         let img = new Image(150,150)
         img.src="Assets/Donut.png"
         Npcs.push(new Npc((canvas.width/2)-30,canvas.height/2,150,150))
         Npcs[0].images.push(img);
+        */
+        npc.draw(player.level);
+        npc.update();
     }
 }
 
 function generateMap() {
     generateCollision()
-    generateCharacters()
+    //generateCharacters()
 }
 function generateCollision() {
     levelNow=[]

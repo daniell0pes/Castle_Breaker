@@ -203,16 +203,11 @@ class playerStance extends Player{
 }
 
 // Non Playable Character
-class Npc extends Sprite{
+class Npc extends AnimatedSprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
     }
-
-    update() {
-        this.draw()
-    }
-
 }
 
 class Enemy extends Sprite{
