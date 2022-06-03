@@ -52,11 +52,11 @@ function playerStateSetter(attackMode){
     if(attackMode){
         playerattack.draw(player.state);
         playerattack.update();
-        console.log("Aqui: " + player.state)
     }else{
         player.move(keys)
     }
 }
+
 function generateCharacters() {
    Npcs.splice(0,1)
     if (player.level==1){

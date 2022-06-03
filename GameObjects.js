@@ -101,7 +101,7 @@ class AnimatedSprite extends Sprite {
 
         array.forEach(image =>{
             image.addEventListener("load", e=>{
-                console.log("loaded" + image.src)
+                console.log("loaded: " + image.src)
                 //------------------------------------------//
             this.numberFrames = numberFrames;
             this.numberFramesPerRow = numberFramesPerRow;
@@ -207,6 +207,11 @@ class playerStance extends Player{
     constructor(x,y,width,height) {
         super(x,y,width,height);
         this.attacks=[];
+    }
+
+    draw(index) {
+        ctx.drawImage(this.images[index-1], this.sx, this.sy, this.slice.width, this.slice.height,
+            player.x, player.y, this.width, this.height);
     }
 
     attack(){

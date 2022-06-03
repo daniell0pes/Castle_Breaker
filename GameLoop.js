@@ -9,8 +9,8 @@ player.load(30,6,player.images,"Assets/Homer/idle/idle_down.png", "Assets/Homer/
     "Assets/Homer/idle/idle_right.png", "Assets/Homer/idle/idle_up.png", 'Assets/Homer/walk/walk_down.png', 'Assets/Homer/walk/walk_left.png', 'Assets/Homer/walk/walk_right.png',
     'Assets/Homer/walk/walk_up.png');
 
-//playerattack.load(15,5,playerattack.images,"Assets/Homer/attack/attack_down.png","Assets/Homer/attack/attack_left.png",
-   // "Assets/Homer/attack/attack_right.png","Assets/Homer/attack/attack_up.png");
+playerattack.load(15,5,playerattack.images,"Assets/Homer/attack/atack_down.png","Assets/Homer/attack/atack_left.png",
+    "Assets/Homer/attack/atack_right.png","Assets/Homer/attack/atack_up.png");
 
 
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
