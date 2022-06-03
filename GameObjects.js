@@ -143,17 +143,8 @@ class Player extends AnimatedSprite{
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
-        this.life=100;
+        this.inventory=[];
     }
-        draw(index) {
-            super.draw(index);
-
-
-
-
-
-
-        }
 
     move(key){
         this.draw(this.state)
@@ -194,71 +185,7 @@ class Player extends AnimatedSprite{
 
 }
 
-// Non Playable Character
-class Npc extends Sprite{
-    constructor(x,y,width,height) {
-        super(x,y,width,height);
-
-    }
-
-    update() {
-        this.draw()
-    }
-
-}
-
-class Enemy extends Sprite {
-    constructor(x, y, width, height) {
-        super(x, y, width, height);
-
-    }
-
-
-    update() {
-
-        this.draw()
-    }
-
-    chase(angle) {
-
-        this.draw()
-
-
-        if (structuresCollision(this.x + Math.cos(angle) * 0.8, this.y + Math.sin(angle) * 0.8, this.width, this.height)) {
-
-            this.x += Math.cos(angle) * 0.8
-            this.y += Math.sin(angle) * 0.8
-
-        } else {
-            if (structuresCollision(this.x, this.y + 1, this.width, this.height)) {
-
-                this.x += 1
-            }
-            if (structuresCollision(this.x, this.y + 1, this.width, this.height)) {
-
-                this.y -= 1
-            }
-            if (structuresCollision(this.x, this.y + 1, this.width, this.height)) {
-
-                this.x -= 1
-            }
-            if (structuresCollision(this.x, this.y + 1, this.width, this.height)) {
-
-                this.y += 1
-            }
-
-
-        }
-
-
-    }
-
-
-}
-
-
-
-    class playerStance extends Player{
+class playerStance extends Player{
     constructor(x,y,width,height) {
         super(x,y,width,height);
         this.attacks=[];
@@ -274,6 +201,27 @@ class Enemy extends Sprite {
         attackDirection(this.attacks[this.attacks.length-1]);
     }
 }
+
+// Non Playable Character
+class Npc extends Sprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+
+    }
+
+    update() {
+        this.draw()
+    }
+
+}
+
+class Enemy extends Sprite{
+    constructor(x,y,width,height) {
+        super();
+    }
+}
+
+
 
 
 class Attack extends GameObject{
