@@ -143,6 +143,7 @@ class Player extends AnimatedSprite{
         this.level=1;
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
+        this.life=100
         this.inventory=[];
     }
 
@@ -212,7 +213,7 @@ class Npc extends AnimatedSprite{
 
 class Enemy extends Sprite{
     constructor(x,y,width,height) {
-        super();
+        super(x,y,width,height);
     }
 }
 
