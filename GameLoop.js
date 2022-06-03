@@ -31,8 +31,11 @@ function animate(){
     })
     foreground.draw(player.level)
     playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
-        attack.drawCollision()
+        //attack.drawCollision()
     })
+        enemy.chase(Math.atan2(player.y-enemy.y,player.x - enemy.x))
+
+        Hp()
        //DrawstructuresCollision();
     }, 1000/fps);
 }
