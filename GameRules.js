@@ -72,6 +72,7 @@ function generateCharacters() {
     }
 }
 
+
 function generateMap() {
     generateCollision()
     //generateCharacters()
@@ -107,26 +108,88 @@ function structuresCollision(X,Y,Width,Height){
                 tileY+=tiles.height
                 tileX=0
             }
-            if(levelNow[i][f] === 20) {
+            if(levelNow[i][f] === 1 ||  levelNow[i][f] === 2 || levelNow[i][f] === 3 || levelNow[i][f] === 4 || levelNow[i][f] === 5 || levelNow[i][f] === 6 || levelNow[i][f] === 7) {
                 if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
-                    console.log("aqui")
-                    player.level++;
+                    if (player.level===1){
+
+                       if(levelNow[i][f] === 2) {
+                        player.x=canvas.width-player.width-tiles.width*3;
+                        player.y = canvas.height-player.height-tiles.height*2
+                       }
+                        if(levelNow[i][f] === 3) {
+                            player.x=canvas.width-player.width-tiles.width*13;
+                            player.y = canvas.height-player.height
+                        }
+                    }
+                    if (player.level===2){
+
+                        if(levelNow[i][f] === 1) {
+                            player.x=canvas.width - tiles.width*5;
+                            player.y =(tiles.height*9)-player.height;
+                        }
+                        if(levelNow[i][f] === 4) {
+                            player.x=canvas.width-player.width-tiles.width*13;
+                            player.y = canvas.height-player.height-tiles.height
+                        }
+                        if(levelNow[i][f] === 5) {
+                            player.x=canvas.width-player.width-tiles.width*13;
+                            player.y = canvas.height-player.height-tiles.height
+                        }
+                    }
+                    if (player.level===3){
+
+                        if(levelNow[i][f] === 1) {
+                            player.x=tiles.width*4;
+                            player.y =(tiles.height*8)-player.height;
+                        }
+                        if(levelNow[i][f] === 6) {
+                            player.x=canvas.width-player.width-tiles.width*13;
+                            player.y = canvas.height-player.height-tiles.height*2
+                        }
+                    }
+
+                    if (player.level===4){
+
+                        if(levelNow[i][f] === 2) {
+                            player.x=tiles.width*9;
+                            player.y =tiles.height*1.5;
+                        }
+                        if(levelNow[i][f] === 7) {
+
+                        }
+                    }
+                    if (player.level===5){
+
+                        if(levelNow[i][f] === 2) {
+                            player.x=tiles.width*22;
+                            player.y =tiles.height*1.5;
+                        }
+                        if(levelNow[i][f] === 7) {
+
+                        }
+                    }
+                    if (player.level===6){
+
+                        if(levelNow[i][f] === 3) {
+                            player.x=canvas.width-player.width-tiles.width*13;
+                            player.y =tiles.height*5;
+                        }
+                        if(levelNow[i][f] === 4) {
+                            player.x=tiles.width*0.80;
+                            player.y = tiles.height*5.5
+                        }
+                    }
+                    player.level= levelNow[i][f];
                     map.init(player.level)
                     generateMap()
 
-                }
-            }
-            if(levelNow[i][f] === 30) {
-                if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
-                    console.log("aqui")
-                    player.level+=2;
-                    map.init(player.level)
-                    generateMap()
 
                 }
             }
 
-                if(levelNow[i][f] == 10) {
+
+
+                if(levelNow[i][f] == 199) {
 
                     if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
                         return true;
@@ -171,11 +234,11 @@ function DrawstructuresCollision(){
                 x=0
             }
 
-            if(levelNow[i][f] === 20) {
+            if(levelNow[i][f] === 2) {
                 ctx.fillStyle="blue"
                 ctx.fillRect(x,y,tiles.width,tiles.height)
             }
-            if(levelNow[i][f] === 30) {
+            if(levelNow[i][f] === 3) {
                 ctx.fillStyle="yellow"
                 ctx.fillRect(x,y,tiles.width,tiles.height)
             }
@@ -187,6 +250,21 @@ function DrawstructuresCollision(){
 
 
                 }
+ if(levelNow[i][f] == 1) {
+
+                    ctx.fillStyle='pink';
+                    ctx.fillRect(x,y,tiles.width,tiles.height);
+
+
+                }
+            if(levelNow[i][f] == 6) {
+
+                ctx.fillStyle='black';
+                ctx.fillRect(x,y,tiles.width,tiles.height);
+
+
+            }
+
 
             x+=tiles.width
 
