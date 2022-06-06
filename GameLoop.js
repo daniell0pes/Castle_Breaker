@@ -3,7 +3,7 @@ const foreground = new Level(0,0,canvas.width,canvas.height);
 const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
-const inventory = new Inventory(canvas.width-900, 100, 1000,700);
+const inventory = new Inventory(976896/1536, 0, 1536000/1536,511700/731);
 let enemy;
 
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
