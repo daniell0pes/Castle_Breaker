@@ -7,7 +7,7 @@ const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731
 const enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,10);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
-const check = new Check(item.x+320,item.y+10,30,30);
+const check = new Check(item.x+(canvas.width*270)/1536,item.y+(canvas.height*40)/731,(canvas.width*30)/1536,(canvas.height*30)/731);
 
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
