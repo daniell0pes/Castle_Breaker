@@ -261,6 +261,7 @@ class Enemy extends Sprite{
             }
         }
     }
+
     attack(){
     if (!this.attackTimeout){
         this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
