@@ -232,9 +232,47 @@ class Npc extends AnimatedSprite{
 }
 
 class Enemy extends Sprite{
-    constructor(x,y,width,height) {
+    constructor(x,y,width,height,damage) {
         super(x,y,width,height);
+
+        this.damage = damage;
+        this.attacks=[]
+        this.attackTimeout=false;
     }
+    draw() {
+        super.draw();
+        ctx.fillRect(this.x,this.y,this.width,this.height)
+    }
+
+    chase(angle){
+        this.draw()
+        if (collision(player.x,player.y,player.width,player.height,this.x,this.y,this.width,this.height)){
+
+            this.attack()
+        }
+        else
+        {
+            if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y ,this.width,this.height)){
+                this.x += Math.cos(angle) * 2
+
+            }
+            if (!structuresCollision(this.x ,this.y + Math.sin(angle) * 2,this.width,this.height)){
+                this.y+=Math.sin(angle)
+            }
+        }
+    }
+    attack(){
+    if (!this.attackTimeout){
+        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+        this.attackTimeout=true
+    }
+        setTimeout(() => {
+            this.attackTimeout=false
+        }, 5000)
+
+    }
+
+
 }
 
 

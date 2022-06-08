@@ -87,6 +87,17 @@ function generateCollision() {
 
 //Função que testa as colisões entre o jogador ou qualquer outro objeto que se mande o X,Y,WIDTH e Height com a posição do tile
 //que se quer, esta função tem o propósito de eliminar repetição de código.
+function collision(X,Y,Width,Height,SecondX,SecondY,SecondWidth,SecondHeight){
+
+    if(X < SecondX + SecondWidth-20 &&
+        X + Width > SecondX &&
+        Y < SecondY + SecondHeight-12 &&
+        Y + Height > SecondY){
+
+        return true;
+    }
+}
+
 function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
     if(X < tileX + tiles.width-20 &&
         X + Width > tileX &&
@@ -189,7 +200,7 @@ function structuresCollision(X,Y,Width,Height){
 
 
 
-                if(levelNow[i][f] == 199) {
+                if(levelNow[i][f] == 10) {
 
                     if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
                         return true;
