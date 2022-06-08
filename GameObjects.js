@@ -218,6 +218,7 @@ class Inventory extends Sprite {
         if (this.activated) {
             this.draw();
             player.inventory[0].draw(1);
+            player.inventory[0].draw(2)
         }
     }
 }

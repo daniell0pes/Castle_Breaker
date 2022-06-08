@@ -3,8 +3,9 @@ const foreground = new Level(0,0,canvas.width,canvas.height);
 const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
-const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*450)/1536,(canvas.height*600)/731);
+const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
 let enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,10);
+const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
@@ -22,7 +23,7 @@ enemy.load("Assets/Donut.png")
 
 inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png");
 
-player.inventory.push(new Sword(inventory.x,inventory.y,inventory.width,200));
+player.inventory.push(new Sword(item.x,item.y,item.width,item.height),new Shield(item.x,item.y*2,item.width,item.height));
 
 
 map.init(player.level)
