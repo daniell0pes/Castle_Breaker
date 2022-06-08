@@ -39,6 +39,14 @@ class Sword extends Item{
     }
 }
 
+class Elixir extends Sword{
+    constructor(x,y,width,height,damage) {
+        super(x,y,width,height);
+
+        this.damage = damage;
+    }
+}
+
 class Potion extends Item{
     constructor(x,y,width,height,hp) {
         super(x,y,width,height);

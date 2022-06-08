@@ -23,7 +23,8 @@ npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
 
 enemy.load("Assets/Donut.png")
 
-inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png","Assets/Inventory/potion1.png");
+inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png",
+    "Assets/Inventory/potion1.png","Assets/Inventory/elixir.png","Assets/Inventory/sword2.png","Assets/Inventory/shield2.png");
 
 player.inventory.push(new Sword(item.x,item.y,item.width,item.height,10),new Shield(item.x,item.y*2,item.width,item.height,10));
 
