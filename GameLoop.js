@@ -15,6 +15,7 @@ player.load(30,6,player.images,"Assets/Homer/idle/idle_down.png", "Assets/Homer/
 
 playerattack.load(15,5,playerattack.images,"Assets/Homer/attack/atack_down.png","Assets/Homer/attack/atack_left.png",
     "Assets/Homer/attack/atack_right.png","Assets/Homer/attack/atack_up.png");
+
 npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
 
 enemy.load("Assets/Donut.png")
