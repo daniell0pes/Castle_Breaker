@@ -107,97 +107,123 @@ function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
             return true;
     }
 }
-function structuresCollision(X,Y,Width,Height){
+function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
+    if(level === 1 ||  level === 2 || level === 3 || level === 4 || level === 5 || level === 6 || level === 7) {
+        if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
+            if (player.level===1){
+
+                if(level === 2) {
+                    player.x=canvas.width-player.width-tiles.width*3;
+                    player.y = canvas.height-player.height-tiles.height*2
+                }
+                if(level === 3) {
+                    player.x=canvas.width-player.width-tiles.width*13;
+                    player.y = canvas.height-player.height
+                }
+            }
+            if (player.level===2){
+
+                if(level === 1) {
+                    player.x=canvas.width - tiles.width*5;
+                    player.y =(tiles.height*9)-player.height;
+                }
+                if(level === 4) {
+                    player.x=canvas.width-player.width-tiles.width*13;
+                    player.y = canvas.height-player.height-tiles.height
+                }
+                if(level === 5) {
+                    player.x=canvas.width-player.width-tiles.width*13;
+                    player.y = canvas.height-player.height-tiles.height
+                }
+            }
+            if (player.level===3){
+
+                if(level === 1) {
+                    player.x=tiles.width*4;
+                    player.y =(tiles.height*8)-player.height;
+                }
+                if(level === 6) {
+                    player.x=canvas.width-player.width-tiles.width*13;
+                    player.y = canvas.height-player.height-tiles.height*2
+                }
+            }
+
+            if (player.level===4){
+
+                if(level === 2) {
+                    player.x=tiles.width*9;
+                    player.y =tiles.height*1.5;
+                }
+                if(level === 7) {
+
+                }
+            }
+            if (player.level===5){
+
+                if(level === 2) {
+                    player.x=tiles.width*22;
+                    player.y =tiles.height*1.5;
+                }
+                if(level === 7) {
+
+                }
+            }
+            if (player.level===6){
+
+                if(level === 3) {
+                    player.x=canvas.width-player.width-tiles.width*13;
+                    player.y =tiles.height*5;
+                }
+                if(level === 4) {
+                    player.x=tiles.width*0.80;
+                    player.y = tiles.height*5.5
+                }
+            }
+            player.level= level;
+            map.init(player.level)
+            generateMap()
+
+
+
+
+            }
+
+
+        }
+    if(level == 503 || level == 505|| level == 506) {
+
+        if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
+
+
+            eButton.interactAction=true
+
+        }
+        else {
+            eButton.interactAction=false
+        }
+    }
+
+
+}
+function structuresCollision(X,Y,Width,Height,type){
     let tileX=0
     let tileY=0
 
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
 
+
+
             if (tileX>=canvas.width-1){
 
                 tileY+=tiles.height
                 tileX=0
             }
-            if(levelNow[i][f] === 1 ||  levelNow[i][f] === 2 || levelNow[i][f] === 3 || levelNow[i][f] === 4 || levelNow[i][f] === 5 || levelNow[i][f] === 6 || levelNow[i][f] === 7) {
-                if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
-                    if (player.level===1){
 
-                       if(levelNow[i][f] === 2) {
-                        player.x=canvas.width-player.width-tiles.width*3;
-                        player.y = canvas.height-player.height-tiles.height*2
-                       }
-                        if(levelNow[i][f] === 3) {
-                            player.x=canvas.width-player.width-tiles.width*13;
-                            player.y = canvas.height-player.height
-                        }
-                    }
-                    if (player.level===2){
+            if (type instanceof Player){
 
-                        if(levelNow[i][f] === 1) {
-                            player.x=canvas.width - tiles.width*5;
-                            player.y =(tiles.height*9)-player.height;
-                        }
-                        if(levelNow[i][f] === 4) {
-                            player.x=canvas.width-player.width-tiles.width*13;
-                            player.y = canvas.height-player.height-tiles.height
-                        }
-                        if(levelNow[i][f] === 5) {
-                            player.x=canvas.width-player.width-tiles.width*13;
-                            player.y = canvas.height-player.height-tiles.height
-                        }
-                    }
-                    if (player.level===3){
-
-                        if(levelNow[i][f] === 1) {
-                            player.x=tiles.width*4;
-                            player.y =(tiles.height*8)-player.height;
-                        }
-                        if(levelNow[i][f] === 6) {
-                            player.x=canvas.width-player.width-tiles.width*13;
-                            player.y = canvas.height-player.height-tiles.height*2
-                        }
-                    }
-
-                    if (player.level===4){
-
-                        if(levelNow[i][f] === 2) {
-                            player.x=tiles.width*9;
-                            player.y =tiles.height*1.5;
-                        }
-                        if(levelNow[i][f] === 7) {
-
-                        }
-                    }
-                    if (player.level===5){
-
-                        if(levelNow[i][f] === 2) {
-                            player.x=tiles.width*22;
-                            player.y =tiles.height*1.5;
-                        }
-                        if(levelNow[i][f] === 7) {
-
-                        }
-                    }
-                    if (player.level===6){
-
-                        if(levelNow[i][f] === 3) {
-                            player.x=canvas.width-player.width-tiles.width*13;
-                            player.y =tiles.height*5;
-                        }
-                        if(levelNow[i][f] === 4) {
-                            player.x=tiles.width*0.80;
-                            player.y = tiles.height*5.5
-                        }
-                    }
-                    player.level= levelNow[i][f];
-                    map.init(player.level)
-                    generateMap()
-
-
-                }
+                roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
             }
-
 
 
                 if(levelNow[i][f] == 10) {
@@ -259,7 +285,7 @@ function DrawstructuresCollision(){
 
 
                 }
- if(levelNow[i][f] == 1) {
+ if(levelNow[i][f] == 503) {
 
                     ctx.fillStyle='pink';
                     ctx.fillRect(x,y,tiles.width,tiles.height);
@@ -282,3 +308,31 @@ function DrawstructuresCollision(){
     }
 
 }
+function quadrantePlayerAoInimigo(){
+
+    if (enemy.x > player.x && enemy.y>player.y){
+        alert("Player no canto superior esquerdo do inimigo")
+    }
+    if (enemy.x < player.x && enemy.y>player.y){
+        alert("Player no canto superior direito do inimigo")
+    }
+    if (enemy.x < player.x && enemy.y<player.y){
+        alert("Player no canto inferior direito do inimigo")
+    }
+    if (enemy.x > player.x && enemy.y<player.y){
+        alert("Player no canto inferior esquerdo do inimigo")
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

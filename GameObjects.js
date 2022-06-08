@@ -158,22 +158,22 @@ class Player extends AnimatedSprite{
         //ctx.fillRect(this.x+37,this.y+37,this.width-75,this.height-75)
 
         for (let i =0;i<key.length;i++) {
-            if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75)) {
+            if (key[i] == "s" && !structuresCollision(this.x+37,this.y+37+6,this.width-75,this.height-75,player)) {
                 this.direction="down";
                 player.state = 5;
                 this.y += 6;
             }
-            if (key[i] == "a" && !structuresCollision(this.x+37-6,this.y+37,this.width-75,this.height-75)) {
+            if (key[i] == "a" && !structuresCollision(this.x+37-6,this.y+37,this.width-75,this.height-75,player)) {
                 this.direction="left"
                 player.state = 6;
                 this.x -= 6;
             }
-            if (key[i]== "d" && !structuresCollision(this.x+37+6,this.y+37,this.width-75,this.height-75)) {
+            if (key[i]== "d" && !structuresCollision(this.x+37+6,this.y+37,this.width-75,this.height-75,player)) {
                 this.direction="right"
                 player.state = 7;
                 this.x += 6;
             }
-            if (key[i]== "w" && !structuresCollision(this.x+37,this.y+37-6,this.width-75,this.height-75)) {
+            if (key[i]== "w" && !structuresCollision(this.x+37,this.y+37-6,this.width-75,this.height-75,player)) {
                 this.direction="up"
                 player.state = 8;
                 this.y -= 6;
@@ -238,33 +238,42 @@ class Npc extends AnimatedSprite{
 }
 
 class Enemy extends Sprite{
-    constructor(x,y,width,height,damage) {
-        super(x,y,width,height);
-
+    constructor(x,y,width,height,life,damage) {
+        super(x,y,width,height)
         this.damage = damage;
+        this.life=life
+        this.maxLife=life
         this.attacks=[]
         this.attackTimeout=false;
     }
     draw() {
         super.draw();
-        ctx.fillRect(this.x,this.y,this.width,this.height)
+
+        ctx.fillStyle="red"
+        ctx.fillRect(this.x-enemy.width*0.6,this.y,this.maxLife,7)
+        ctx.fillStyle="green"
+        ctx.fillRect(this.x-enemy.width*0.6,this.y,(this.life*70)/this.maxLife,7)
     }
 
     chase(angle){
         this.draw()
-        if (collision(player.x,player.y,player.width,player.height,this.x,this.y,this.width,this.height)){
+       if (collision(player.x,player.y,player.width,player.height,this.x,this.y,this.width,this.height)){
 
             this.attack()
         }
         else
         {
-            if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y ,this.width,this.height)){
-                this.x += Math.cos(angle) * 2
+            if (structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2 ,this.width,this.height)){
 
             }
-            if (!structuresCollision(this.x ,this.y + Math.sin(angle) * 2,this.width,this.height)){
-                this.y+=Math.sin(angle)
+            else {
+                this.x += Math.cos(angle) * 2
+                this.y+=Math.sin(angle) * 2
+
             }
+
+
+
         }
     }
 
@@ -283,7 +292,21 @@ class Enemy extends Sprite{
 }
 
 
+class Interact extends Sprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
 
+this.interactAction = false
+
+    }
+
+    update() {
+        if (this.interactAction)
+        this.draw()
+        this.x=player.x
+        this.y=player.y
+    }
+}
 
 class Attack extends GameObject{
     constructor(x,y,width,height) {

@@ -38,7 +38,9 @@ window.addEventListener('keypress',function (e){
 
 let attackTimeOut = false;
 window.addEventListener("click",function (e) {
-   if (!attackTimeOut){
+   //quadrantePlayerAoInimigo()
+
+    if (!attackTimeOut){
 
 
        if (e.clientY<player.y+player.height/2 && e.clientX>player.x-30 && e.clientX<player.x+player.width +30){
@@ -69,10 +71,7 @@ window.addEventListener("click",function (e) {
 
        }, 500)
 
-       setTimeout(() => {
-           attackTimeOut = false;
-           playerattack.attacks.splice(0,1);
-       }, 500)
+
 
    }
 
