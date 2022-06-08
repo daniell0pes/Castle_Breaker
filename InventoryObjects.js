@@ -13,17 +13,20 @@ class Item extends Sprite {
 
     equip(){
         this.equiped = true;
+        console.log("Player Hp: " + player.life + "Player Damage: " + player.damage);
     }
 
     unequip(){
         this.equiped = false;
-
+        console.log("Player Hp: " + player.life + "Player Damage: " + player.damage);
     }
 }
 
 class Sword extends Item{
     constructor(x,y,width,height,damage) {
         super(x,y,width,height);
+
+        this.damage = damage;
     }
     equip(){
         super.equip()
@@ -39,6 +42,8 @@ class Sword extends Item{
 class Potion extends Item{
     constructor(x,y,width,height,hp) {
         super(x,y,width,height);
+
+        this.hp = hp;
     }
 
     equip(){
@@ -51,6 +56,8 @@ class Potion extends Item{
 class Shield extends Potion{
     constructor(x,y,width,height,hp) {
         super(x,y,width,height,hp);
+
+        this.hp = hp;
     }
 
     unequip() {
@@ -78,10 +85,18 @@ class Selection extends Sprite{
         }else if(key==="ArrowDown" && this.numberOfOptions<=(player.inventory.length-2)){
             this.numberOfOptions++;
             this.y+=item.y;
-        }else if(key==="Enter" && this.numberOfOptions>0 && this.numberOfOptions<(player.inventory.length-1)){
+        }else if(key==="Enter" && this.numberOfOptions>=0){
+            console.log("equip")
             if(!player.inventory[this.numberOfOptions].equiped){
                 player.inventory[this.numberOfOptions].equip();
+                this.checks.push(new Check(item.x+(canvas.width*270)/1536,player.inventory[this.numberOfOptions].y+(canvas.height*40)/731,(canvas.width*30)/1536,(canvas.height*30)/731))
             }else if(player.inventory[this.numberOfOptions].equiped && player.inventory[this.numberOfOptions] instanceof Sword || player.inventory[this.numberOfOptions] instanceof Shield){
+                console.log("unequip");
+                this.checks.forEach((check,index)=>{
+                    if(check.y===player.inventory[this.numberOfOptions].y+(canvas.height*40)/731){
+                        this.checks.splice(index,1);
+                    }
+                })
                 player.inventory[this.numberOfOptions].unequip();
             }
         }

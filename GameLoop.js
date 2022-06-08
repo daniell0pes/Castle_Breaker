@@ -7,7 +7,7 @@ const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731
 const enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,10);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
-const check = new Check(item.x+(canvas.width*270)/1536,item.y+(canvas.height*40)/731,(canvas.width*30)/1536,(canvas.height*30)/731);
+const check = new Check();
 
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
@@ -25,7 +25,7 @@ enemy.load("Assets/Donut.png")
 
 inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png","Assets/Inventory/potion1.png");
 
-player.inventory.push(new Sword(item.x,item.y,item.width,item.height,10),new Shield(item.x,item.y*2,item.width,item.height,0));
+player.inventory.push(new Sword(item.x,item.y,item.width,item.height,10),new Shield(item.x,item.y*2,item.width,item.height,10));
 
 check.load("Assets/Inventory/check.png");
 
@@ -48,7 +48,7 @@ function animate(){
      enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
     foreground.draw(player.level)
     inventory.drawInventory();
-     check.draw();
+    Hp();
     /*
     playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()

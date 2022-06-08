@@ -26,7 +26,9 @@ window.addEventListener('keydown',function(e){
     if (!existe){
         keys.push(e.key);
     }
-    selection.select(e.key)
+    if(inventory.activated) {
+        selection.select(e.key)
+    }
 });
 
 window.addEventListener('keypress',function (e){

@@ -223,8 +223,6 @@ function Hp(){
     ctx.fillRect(0,0,400,20)
     ctx.fillStyle="green";
     ctx.fillRect(0,0,player.life*4,20)
-
-
     ctx.strokeStyle= "Gold"; //set the color of the stroke line
     ctx.strokeRect(0,0,400,20)
 

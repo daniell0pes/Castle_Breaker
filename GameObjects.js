@@ -143,6 +143,7 @@ class Player extends AnimatedSprite{
         this.state=3; //animação do jogador consoante a sua direção
         this.life=100
         this.inventory=[];
+        this.damage=10;
     }
 
     move(key){
@@ -221,6 +222,9 @@ class Inventory extends Sprite {
                 item.draw(index+1);
             })
             selection.draw();
+            selection.checks.forEach(check =>{
+                check.draw();
+            })
         }
     }
 }
@@ -284,8 +288,6 @@ class Enemy extends Sprite{
 class Attack extends GameObject{
     constructor(x,y,width,height) {
         super(x,y,width,height);
-
-    this.damage=10;
 
     }
     drawCollision() {
