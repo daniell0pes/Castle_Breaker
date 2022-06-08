@@ -217,8 +217,10 @@ class Inventory extends Sprite {
     drawInventory(){
         if (this.activated) {
             this.draw();
-            player.inventory[0].draw(1);
-            player.inventory[0].draw(2)
+            player.inventory.forEach((item,index) =>{
+                item.draw(index+1);
+            })
+            selection.draw();
         }
     }
 }

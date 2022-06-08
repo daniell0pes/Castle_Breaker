@@ -13,31 +13,86 @@ class Item extends Sprite {
 
     equip(){
         this.equiped = true;
-        player.damage += this.stats.damage;
-        player.life += this.stats.hp;
     }
 
     unequip(){
         this.equiped = false;
-        player.damage = player.damage-this.stats.damage;
-        player.life = player.life-this.stats.hp;
+
     }
 }
 
 class Sword extends Item{
-    constructor(x,y,width,height) {
+    constructor(x,y,width,height,damage) {
         super(x,y,width,height);
+    }
+    equip(){
+        super.equip()
+        player.damage += this.damage;
+    }
+
+    unequip() {
+        super.unequip();
+        player.damage= player.damage-this.damage;
     }
 }
 
 class Potion extends Item{
-    constructor(x,y,width,height) {
+    constructor(x,y,width,height,hp) {
         super(x,y,width,height);
+    }
+
+    equip(){
+        super.equip();
+        player.life += this.hp;
+    }
+
+}
+
+class Shield extends Potion{
+    constructor(x,y,width,height,hp) {
+        super(x,y,width,height,hp);
+    }
+
+    unequip() {
+        super.unequip();
+        player.life = player.life - this.hp;
     }
 }
 
-class Shield extends Item{
+class Selection extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
+        this.numberOfOptions=0;
+        this.checks=[];
+    }
+    draw(){
+        ctx.fillStyle="black";
+        ctx.strokeRect(this.x,this.y,this.width,this.height);
+    }
+
+    select(key){
+        console.log(this.numberOfOptions);
+        if(key==="ArrowUp" && this.numberOfOptions>0){
+            this.numberOfOptions--;
+            this.y -= item.y;
+        }else if(key==="ArrowDown" && this.numberOfOptions<=(player.inventory.length-2)){
+            this.numberOfOptions++;
+            this.y+=item.y;
+        }else if(key==="Enter" && this.numberOfOptions>0 && this.numberOfOptions<(player.inventory.length-1)){
+            if(!player.inventory[this.numberOfOptions].equiped){
+                player.inventory[this.numberOfOptions].equip();
+            }else if(player.inventory[this.numberOfOptions].equiped && player.inventory[this.numberOfOptions] instanceof Sword || player.inventory[this.numberOfOptions] instanceof Shield){
+                player.inventory[this.numberOfOptions].unequip();
+            }
+        }
+    }
+}
+
+class Check extends Sprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
+    }
+    draw(){
+        ctx.drawImage(check.images[0], this.x, this.y, this.width, this.height);
     }
 }

@@ -26,10 +26,12 @@ window.addEventListener('keydown',function(e){
     if (!existe){
         keys.push(e.key);
     }
+    selection.select(e.key)
 });
 
 window.addEventListener('keypress',function (e){
-        inventory.allowInventory(e.key);
+    e.preventDefault();
+    inventory.allowInventory(e.key);
 })
 
 let attackTimeOut = false;
