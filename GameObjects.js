@@ -197,7 +197,7 @@ class playerStance extends Player{
     }
 
     attack(){
-        this.attacks.push(new Attack(player.x,player.y,25,100))
+        this.attacks.push(new Attack(player.x,player.y,50,100))
         attackDirection(this.attacks[this.attacks.length-1]);
         attackToEnemy()
     }
@@ -247,6 +247,8 @@ class Enemy extends Sprite{
         this.attacks=[]
         this.attackTimeout=false;
     }
+
+
     draw() {
         super.draw();
 
@@ -258,21 +260,29 @@ class Enemy extends Sprite{
 
     chase(angle){
         this.draw()
-       if (collision(player.x,player.y,player.width,player.height,this.x,this.y,this.width,this.height)){
+       if (collision(player.x,player.y,player.width,player.height,this.x+this.width/2,this.y+this.height/2,this.width-this.width/2,this.height-this.height/2)){
 
             this.attack()
 
         }
         else
         {
-            if (structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2 ,this.width,this.height,enemy)){
-
-            }
-            else {
+            if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2  ,this.width,this.height,enemy)){
                 this.x += Math.cos(angle) * 2
                 this.y+=Math.sin(angle) * 2
+            }
+            else{
+                if (!structuresCollision(this.x,this.y+2,this.width,this.height,enemy)){
+
+                    this.y+=2
+                }
+                else if (!structuresCollision(this.x + 2,this.y,this.width,this.height,enemy)){
+
+                this.x+=2
+            }
 
             }
+
 
 
 
@@ -281,7 +291,7 @@ class Enemy extends Sprite{
 
     attack(){
     if (!this.attackTimeout){
-        this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
+        this.attacks.push(new Attack(this.x+30,this.y,this.width+30,this.height-20))
         this.attackTimeout=true
         attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
 

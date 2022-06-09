@@ -4,7 +4,7 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-let enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,100);
+let enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,32,32,100,10);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
@@ -45,18 +45,27 @@ const fps=30;
 function animate(){
     setTimeout(function () {
     requestAnimationFrame(animate);
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
+
     map.draw(player.level);
+
     generateCharacters();
     playerStateSetter(attackTimeOut);
-    eButton.update()
 
+if (enemy!=null){
+        if (enemy.life<=0){
+
+    enemy=null
+}}
 //structuresCollision(player.x,player.y,player.width,player.height)
         if (enemy!=null){
-     enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))}
+     enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
+        }
     foreground.draw(player.level)
     inventory.drawInventory();
     Hp();
+        eButton.update()
 
    /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()

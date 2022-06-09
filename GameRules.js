@@ -57,16 +57,11 @@ function playerStateSetter(attackMode){
 
 
 function generateCharacters() {
-    //Npcs.splice(0,1)
+
     if (player.level == 1) {
-        /*
-        let img = new Image(150,150)
-        img.src="Assets/Donut.png"
-        Npcs.push(new Npc((canvas.width/2)-30,canvas.height/2,150,150))
-        Npcs[0].images.push(img);
-        */
         npc.draw(player.level);
         npc.update();
+
     }
 }
 
@@ -113,6 +108,9 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 2) {
                     player.x=canvas.width-player.width-tiles.width*3;
                     player.y = canvas.height-player.height-tiles.height*2
+
+                    enemy = new Enemy(tiles.width*7,tiles.height*6,64,64,100,10)
+                    enemy.load("Assets/Donut.png")
                 }
                 if(level === 3) {
                     player.x=canvas.width-player.width-tiles.width*13;
@@ -220,8 +218,20 @@ function structuresCollision(X,Y,Width,Height,type){
 
             if (type instanceof Player){
 
+
+                if (collision(player.x,player.y,player.width,player.height,npc.x+npc.width/2,npc.y+npc.height/2,npc.width-npc.width/1.3,npc.height-npc.height/2)){
+
+                    eButton.interactAction=true
+
+
+                }
+                else{
+                    eButton.interactAction=false
+
+                }
                 roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
             }
+
 
 
                 if(levelNow[i][f] == 10) {
@@ -257,14 +267,26 @@ function attackToEnemy(){
 if (playerattack.attacks!=[] && enemy!=null){
    if (collision(playerattack.attacks[playerattack.attacks.length-1].x,playerattack.attacks[playerattack.attacks.length-1].y,playerattack.attacks[playerattack.attacks.length-1].width,playerattack.attacks[playerattack.attacks.length-1].height,enemy.x,enemy.y,enemy.width,enemy.height)){
 playerattack.attacks.splice(playerattack.attacks.length-1,1)
-        enemy.life-=20
+        enemy.life-= player.damage
+       if (player.direction==="right"){
+       enemy.x+=10}
+       if (player.direction==="left"){
+       enemy.x-=10}
+       if (player.direction==="up"){
+       enemy.y-=10}
+       if (player.direction==="down"){
+       enemy.y+=10}
+
+
+
+
 }}
 }
 function attackToPlayer(x,y,width,height){
 if (enemy.attacks!=[]){
    if (collision(x,y,width,height,player.x,player.y,player.width,player.height)) {
        enemy.attacks.splice(enemy.attacks.length - 1, 1)
-       player.life -= 20
+       player.life -= enemy.damage
    }}
 }
 
