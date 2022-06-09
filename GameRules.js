@@ -190,13 +190,27 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
 
-
             eButton.interactAction=true
+            for (let i =0;i<keys.length-1;i++) {
+                console.log(keys.length)
+                if(keys[i]==="e" && level===503){
+                    console.log("aqui")
+                    player.inventory.push(new Potion(item.x,item.y*(player.inventory.length+1),item.width,item.height,4,20));
+                    inventory.activated=true;
 
+                }else if(keys[i]==="e" && level===505){
+                    player.inventory.push(new Shield(item.x,item.y*(player.inventory.length+1),item.width,item.height,7,20));
+                    inventory.activated=true;
+                }else if(keys[i]==="e" && level===506){
+                    player.inventory.push(new Elixir(item.x,item.y*(player.inventory.length+1),item.width,item.height,5,20));
+                    inventory.activated=true;
+                }
+            }
         }
         else {
             eButton.interactAction=false
         }
+
     }
 
 

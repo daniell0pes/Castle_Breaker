@@ -318,8 +318,7 @@ class Interact extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
 
-this.interactAction = false
-
+    this.interactAction = false
     }
 
     update() {
@@ -328,6 +327,7 @@ this.interactAction = false
         this.x=player.x
         this.y=player.y
     }
+
 }
 
 class Attack extends GameObject{
