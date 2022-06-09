@@ -1,14 +1,11 @@
 class Item extends Sprite {
-    constructor(x,y,width,height) {
+    constructor(x,y,width,height,id) {
         super(x,y,width,height);
         this.equiped = false;
-        this.stats = {
-            damage : 0,
-            hp:0
-        }
+        this.id=id;
     }
-    draw(index){
-        ctx.drawImage(inventory.images[index], this.x, this.y, this.width, this.height)
+    draw(){
+        ctx.drawImage(inventory.images[this.id], this.x, this.y, this.width, this.height)
     }
 
     equip(){
@@ -23,9 +20,8 @@ class Item extends Sprite {
 }
 
 class Sword extends Item{
-    constructor(x,y,width,height,damage) {
-        super(x,y,width,height);
-
+    constructor(x,y,width,height,id,damage) {
+        super(x,y,width,height,id);
         this.damage = damage;
     }
     equip(){
@@ -40,7 +36,7 @@ class Sword extends Item{
 }
 
 class Elixir extends Sword{
-    constructor(x,y,width,height,damage) {
+    constructor(x,y,width,height,id,damage) {
         super(x,y,width,height);
 
         this.damage = damage;
@@ -48,9 +44,8 @@ class Elixir extends Sword{
 }
 
 class Potion extends Item{
-    constructor(x,y,width,height,hp) {
-        super(x,y,width,height);
-
+    constructor(x,y,width,height,id,hp) {
+        super(x,y,width,height,id);
         this.hp = hp;
     }
 
@@ -62,9 +57,8 @@ class Potion extends Item{
 }
 
 class Shield extends Potion{
-    constructor(x,y,width,height,hp) {
-        super(x,y,width,height,hp);
-
+    constructor(x,y,width,height,id,hp) {
+        super(x,y,width,height,id,hp);
         this.hp = hp;
     }
 
@@ -96,6 +90,16 @@ class Selection extends Sprite{
         }else if(key==="Enter" && this.numberOfOptions>=0){
             console.log("equip")
             if(!player.inventory[this.numberOfOptions].equiped){
+                player.inventory.forEach((item,index)=>{
+                    if(item.constructor.name === player.inventory[this.numberOfOptions].constructor.name && item!==player.inventory[this.numberOfOptions]){
+                        item.unequip();
+                        for(let i=0; i<this.checks.length;i++) {
+                            if (this.checks[i].y === item.y + (canvas.height * 40) / 731) {
+                                this.checks.splice(i, 1);
+                            }
+                        }
+                    }
+                })
                 player.inventory[this.numberOfOptions].equip();
                 this.checks.push(new Check(item.x+(canvas.width*270)/1536,player.inventory[this.numberOfOptions].y+(canvas.height*40)/731,(canvas.width*30)/1536,(canvas.height*30)/731))
             }else if(player.inventory[this.numberOfOptions].equiped && player.inventory[this.numberOfOptions] instanceof Sword || player.inventory[this.numberOfOptions] instanceof Shield){
