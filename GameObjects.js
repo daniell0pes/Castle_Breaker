@@ -197,7 +197,7 @@ class playerStance extends Player{
     }
 
     attack(){
-        this.attacks.push(new Attack(player.x,player.y,50,100))
+        this.attacks.push(new Attack(player.x,player.y,50,150))
         attackDirection(this.attacks[this.attacks.length-1]);
         attackToEnemy()
     }
@@ -290,7 +290,7 @@ class Enemy extends Sprite{
 
     attack(){
     if (!this.attackTimeout){
-        this.attacks.push(new Attack(this.x+30,this.y,this.width+30,this.height-20))
+        this.attacks.push(new Attack(this.x-30,this.y,this.width+30,this.height+20))
         this.attackTimeout=true
         attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
 
@@ -322,10 +322,10 @@ class Interact extends Sprite{
     }
 
     update() {
-        if (this.interactAction)
+        if (this.interactAction){
         this.draw()
         this.x=player.x
-        this.y=player.y
+        this.y=player.y}
     }
 
 }

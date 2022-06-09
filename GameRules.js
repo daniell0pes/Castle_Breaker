@@ -192,9 +192,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
             eButton.interactAction=true
             for (let i =0;i<keys.length-1;i++) {
-                console.log(keys.length)
                 if(keys[i]==="e" && level===503){
-                    console.log("aqui")
                     player.inventory.push(new Potion(item.x,item.y*(player.inventory.length+1),item.width,item.height,4,20));
                     inventory.activated=true;
 
@@ -235,12 +233,12 @@ function structuresCollision(X,Y,Width,Height,type){
 
                 if (collision(player.x,player.y,player.width,player.height,npc.x+npc.width/2,npc.y+npc.height/2,npc.width-npc.width/1.3,npc.height-npc.height/2)){
 
-                    eButton.interactAction=true
+
 
 
                 }
                 else{
-                    eButton.interactAction=false
+
 
                 }
                 roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
