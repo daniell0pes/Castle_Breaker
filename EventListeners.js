@@ -63,7 +63,6 @@ window.addEventListener("click",function (e) {
            player.state = 2;
        }
        playerattack.attack()
-       player.life-=20
        attackTimeOut=true;
        setTimeout(() => {
            attackTimeOut = false;

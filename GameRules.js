@@ -255,6 +255,23 @@ function Hp(){
 }
 
 
+function attackToEnemy(){
+if (playerattack.attacks!=[] && enemy!=null){
+   if (collision(playerattack.attacks[playerattack.attacks.length-1].x,playerattack.attacks[playerattack.attacks.length-1].y,playerattack.attacks[playerattack.attacks.length-1].width,playerattack.attacks[playerattack.attacks.length-1].height,enemy.x,enemy.y,enemy.width,enemy.height)){
+playerattack.attacks.splice(playerattack.attacks.length-1,1)
+        enemy.life-=20
+}}
+}
+function attackToPlayer(x,y,width,height){
+if (enemy.attacks!=[]){
+   if (collision(x,y,width,height,player.x,player.y,player.width,player.height)) {
+       enemy.attacks.splice(enemy.attacks.length - 1, 1)
+       player.life -= 20
+   }}
+}
+
+
+
 //para propósito de testes
 function DrawstructuresCollision(){
 

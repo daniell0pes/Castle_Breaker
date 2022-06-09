@@ -199,6 +199,7 @@ class playerStance extends Player{
     attack(){
         this.attacks.push(new Attack(player.x,player.y,25,100))
         attackDirection(this.attacks[this.attacks.length-1]);
+        attackToEnemy()
     }
 }
 
@@ -250,9 +251,9 @@ class Enemy extends Sprite{
         super.draw();
 
         ctx.fillStyle="red"
-        ctx.fillRect(this.x-enemy.width*0.6,this.y,this.maxLife,7)
+        ctx.fillRect(this.x-20,this.y-10,this.maxLife,7)
         ctx.fillStyle="green"
-        ctx.fillRect(this.x-enemy.width*0.6,this.y,(this.life*70)/this.maxLife,7)
+        ctx.fillRect(this.x-20,this.y-10,this.life,7)
     }
 
     chase(angle){
@@ -260,10 +261,11 @@ class Enemy extends Sprite{
        if (collision(player.x,player.y,player.width,player.height,this.x,this.y,this.width,this.height)){
 
             this.attack()
+
         }
         else
         {
-            if (structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2 ,this.width,this.height)){
+            if (structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2 ,this.width,this.height,enemy)){
 
             }
             else {
@@ -281,11 +283,22 @@ class Enemy extends Sprite{
     if (!this.attackTimeout){
         this.attacks.push(new Attack(this.x,this.y,this.width,this.height))
         this.attackTimeout=true
-    }
-        setTimeout(() => {
-            this.attackTimeout=false
-        }, 5000)
+        attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
 
+        this.timeout()
+
+
+    }
+
+
+    }
+    timeout(){
+
+        setTimeout(() => {
+            this.attackTimeout = false;
+
+
+        }, 1500)
     }
 
 

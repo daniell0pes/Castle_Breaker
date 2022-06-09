@@ -4,7 +4,7 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-const enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,10);
+let enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,100);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
@@ -32,7 +32,7 @@ inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","A
 player.inventory.push(new Sword(item.x,item.y,item.width,item.height,10),new Shield(item.x,item.y*2,item.width,item.height,10));
 
 check.load("Assets/Inventory/check.png");
-
+//enemy=null
 //Exemplo de adição de um item ao inventário
 //player.inventory.push(new Potion(item.x,item.y*(inventory.images.length-1),item.width,item.height,10));
 
@@ -52,12 +52,13 @@ function animate(){
     eButton.update()
 
 //structuresCollision(player.x,player.y,player.width,player.height)
-     enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
+        if (enemy!=null){
+     enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))}
     foreground.draw(player.level)
     inventory.drawInventory();
     Hp();
-    /*
-    playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
+
+   /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()
     })*/
     //DrawstructuresCollision();
