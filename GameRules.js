@@ -44,8 +44,6 @@ function attackDirection(attack) {
         attack.x+=37
 
     }
-
-
 }
 
 function playerStateSetter(attackMode){

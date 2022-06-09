@@ -48,17 +48,19 @@ window.addEventListener("click",function (e) {
            player.direction="up";
            player.state = 4;
        }
-       else if (e.clientX>player.x- player.width/2){
+       else if (e.clientX>player.x+ player.width/2){
 
            player.direction="right";
            player.state = 3;
        }
-       if (e.clientY>player.y+player.height/2 && e.clientX>player.x-30 && e.clientX<player.x+player.width +30){
+       else if (e.clientY>player.y+player.height/2 && e.clientX>player.x-30 && e.clientX<player.x+player.width +30){
+
            player.direction="down";
            player.state = 1;
 
        }
        else if (e.clientX<player.x+ player.width/2){
+
           player.direction="left";
            player.state = 2;
        }

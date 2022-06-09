@@ -34,7 +34,7 @@ player.inventory.push(new Sword(item.x,item.y,item.width,item.height,10),new Shi
 check.load("Assets/Inventory/check.png");
 //enemy=null
 //Exemplo de adição de um item ao inventário
-//player.inventory.push(new Potion(item.x,item.y*(inventory.images.length-1),item.width,item.height,10));
+player.inventory.push(new Potion(item.x,item.y*(inventory.images.length-1),item.width,item.height,10));
 
 
 map.init(player.level)
