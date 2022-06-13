@@ -61,45 +61,6 @@ function leftPathPossible(i,f) {
     }
     return contadorDeEspacosEsquerda
 }
-function haCaminhoDireitaArray(i,f) {
-
-
-console.log(levelNow[f][i])
-    if(levelNow[f][i]!=0){
-
-        return true
-    }
-    else {
-        return  false;
-    }
-
-}
-function haCaminhoEsquerda(i,f) {
-
-    if (levelNow[i+1][f]===0){
-
-        return true;
-
-    }
-    else if (f<0 ){
-
-        return false
-    }
-
-    else {
-
-
-
-        haCaminhoEsquerda(i,f-1)
-
-
-
-    }
-
-
-
-}
-
 
 
 function attackDirection(attack) {
