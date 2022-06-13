@@ -26,6 +26,9 @@ window.addEventListener('keydown',function(e){
     if (!existe){
         keys.push(e.key);
     }
+    if(eButton.interactAction){
+            addItem(e.key);
+        }
     if(inventory.activated) {
         selection.select(e.key)
     }
