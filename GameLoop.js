@@ -4,7 +4,7 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-let enemy = new Enemy(canvas.width/2,(canvas.height/2)-tiles.height*3,64,64,100,10);
+let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*3,64,64,100,10);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
@@ -68,10 +68,15 @@ if (enemy!=null){
     Hp();
         eButton.update()
 
+
+        console.log("Espaços á direita -   "+rightPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
+        console.log("Espaços á esquerda -   "+leftPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
+
+
    /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()
     })*/
-    //DrawstructuresCollision();
+    DrawstructuresCollision();
     }, 1000/fps);
 }
 

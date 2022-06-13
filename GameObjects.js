@@ -144,6 +144,10 @@ class Player extends AnimatedSprite{
         this.life=100
         this.inventory=[];
         this.damage=10;
+        this.positionArray={
+            x:0,
+            y:0
+        }
     }
 
     move(key){
@@ -237,6 +241,7 @@ class Npc extends AnimatedSprite{
     }
 }
 
+/*
 class Enemy extends Sprite{
     constructor(x,y,width,height,life,damage) {
         super(x,y,width,height)
@@ -245,6 +250,11 @@ class Enemy extends Sprite{
         this.maxLife=life
         this.attacks=[]
         this.attackTimeout=false;
+
+        this.positionArray={
+            x:0,
+            y:0
+        }
     }
 
 
@@ -264,7 +274,7 @@ class Enemy extends Sprite{
             this.attack()
 
         }
-        else
+       /!* else
         {
             if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2  ,this.width,this.height,enemy)){
                 this.x += Math.cos(angle) * 2
@@ -285,7 +295,7 @@ class Enemy extends Sprite{
 
 
 
-        }
+        }*!/
     }
 
     attack(){
@@ -312,6 +322,7 @@ class Enemy extends Sprite{
 
 
 }
+*/
 
 
 class Interact extends Sprite{
@@ -342,3 +353,153 @@ class Attack extends GameObject{
 }
 
 
+class Enemy extends Sprite{
+    constructor(x,y,width,height,life,damage) {
+        super(x,y,width,height)
+        this.damage = damage;
+        this.life=life
+        this.maxLife=life
+        this.attacks=[]
+        this.attackTimeout=false;
+
+        this.positionArray={
+            x:10,
+            y:10
+        }
+        this.goToDirection={
+            right:false,
+            left:false,
+            up:false,
+            down:false
+        }
+    }
+
+
+    draw() {
+        super.draw();
+
+        ctx.fillStyle="red"
+        ctx.fillRect(this.x-20,this.y-10,this.maxLife,7)
+        ctx.fillStyle="green"
+        ctx.fillRect(this.x-20,this.y-10,this.life,7)
+    }
+
+    chase(angle){
+        this.draw()
+        if (collision(player.x,player.y,player.width,player.height,this.x+this.width/2,this.y+this.height/2,this.width-this.width/2,this.height-this.height/2)){
+
+            this.attack()
+
+        }
+         else
+         {
+             if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2  ,this.width,this.height,enemy)){
+                 this.x += Math.cos(angle) * 2
+                 this.y+=Math.sin(angle) * 2
+
+             }
+             else{
+                 if (quadrantePlayerAoInimigo()==3||quadrantePlayerAoInimigo()==4){
+
+                    if (rightPathPossible(this.positionArray.x,this.positionArray.y) <= leftPathPossible(this.positionArray.x,this.positionArray.y)){
+                        if (structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                        this.x +=2}
+
+                    }
+                    if (rightPathPossible(this.positionArray.x,this.positionArray.y) > leftPathPossible(this.positionArray.x,this.positionArray.y)){
+                        if (structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                            this.x -=2
+                        }
+
+                    }
+                    if (!structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                        this.y+=2
+                    }
+
+
+                 }
+                 if (quadrantePlayerAoInimigo()==1||quadrantePlayerAoInimigo()==2){
+
+                     if (rightPathPossible(this.positionArray.x,this.positionArray.y-3) <= leftPathPossible(this.positionArray.x,this.positionArray.y-3)){
+                         if (structuresCollision(this.x ,this.y -  2  ,this.width,this.height,enemy)){
+                             this.x +=2}
+
+                     }
+                     if (rightPathPossible(this.positionArray.x,this.positionArray.y-3) > leftPathPossible(this.positionArray.x,this.positionArray.y-3)){
+                         if (structuresCollision(this.x ,this.y -  2  ,this.width,this.height,enemy)){
+                             this.x -=2
+                         }
+
+                     }
+                     if (!structuresCollision(this.x ,this.y - 2  ,this.width,this.height,enemy)){
+                         this.y-=2
+                     }
+                 }
+
+
+
+
+
+
+
+
+
+
+                 /*if (quadrantePlayerAoInimigo() ===3 || quadrantePlayerAoInimigo()===4){
+                    if (haCaminhoDireitaArray(this.positionArray.x-2,this.positionArray.y+1) ){
+                     this.x+=2}
+                    else if (!structuresCollision(this.x,this.y + 2  ,this.width,this.height,enemy)){
+
+                        this.y+=2
+                    }
+
+                 }
+
+
+                 if ((quadrantePlayerAoInimigo() ===1 || quadrantePlayerAoInimigo()===2)){
+                        if (haCaminhoDireitaArray(this.positionArray.x-2,this.positionArray.y-2) ){
+                            this.x+=2
+                        }
+                        else if (!structuresCollision(this.x,this.y + 2  ,this.width,this.height,enemy)){
+
+                            this.y-=2
+                        }
+
+                 }*/
+
+
+
+             }
+
+
+
+
+
+
+         }
+    }
+
+    attack(){
+        if (!this.attackTimeout){
+            this.attacks.push(new Attack(this.x-30,this.y,this.width+30,this.height+20))
+            this.attackTimeout=true
+            attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
+
+            this.timeout()
+
+
+        }
+
+
+    }
+    timeout(){
+
+        setTimeout(() => {
+            this.attackTimeout = false;
+
+
+        }, 1500)
+    }
+
+
+}

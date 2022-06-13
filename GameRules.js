@@ -25,6 +25,83 @@ function idle_setter(){
     }
 }
 
+function rightPathPossible(i,f) {
+    let contadorDeEspacos=0;
+    //console.log(levelNow[f+1][i])
+
+  for (let x=i;x<30;x++){
+
+      if (levelNow[f+1][x]===10){
+
+            contadorDeEspacos++
+      }
+      if (levelNow[f+1][x]===0){
+
+          return contadorDeEspacos
+      }
+  }
+return contadorDeEspacos
+}
+function leftPathPossible(i,f) {
+    let contadorDeEspacosEsquerda=0;
+    //console.log(levelNow[f+1][i])
+
+    for (let x=i;x>0;x--){
+
+        if (levelNow[f+1][x]===10){
+
+            contadorDeEspacosEsquerda++
+        }
+        if (levelNow[f+1][x]===0){
+
+            return contadorDeEspacosEsquerda
+        }
+
+
+    }
+    return contadorDeEspacosEsquerda
+}
+function haCaminhoDireitaArray(i,f) {
+
+
+console.log(levelNow[f][i])
+    if(levelNow[f][i]!=0){
+
+        return true
+    }
+    else {
+        return  false;
+    }
+
+}
+function haCaminhoEsquerda(i,f) {
+
+    if (levelNow[i+1][f]===0){
+
+        return true;
+
+    }
+    else if (f<0 ){
+
+        return false
+    }
+
+    else {
+
+
+
+        haCaminhoEsquerda(i,f-1)
+
+
+
+    }
+
+
+
+}
+
+
+
 function attackDirection(attack) {
     if (player.direction=="right"){
         attack.x += player.width
@@ -92,10 +169,10 @@ function collision(X,Y,Width,Height,SecondX,SecondY,SecondWidth,SecondHeight){
 }
 
 function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
-    if(X < tileX + tiles.width-20 &&
-        X + Width > tileX &&
-        Y < tileY + tiles.height-12 &&
-        Y + Height > tileY){
+    if(X <= tileX + tiles.width &&
+        X + Width >= tileX &&
+        Y <= tileY + tiles.height &&
+        Y + Height >= tileY){
 
             return true;
     }
@@ -191,7 +268,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
 
             eButton.interactAction=true
-            for (let i =0;i<keys.length-1;i++) {
+            for (let i =0;i<keys.length;i++) {
+                console.log(keys[keys.length-1])
                 if(keys[i]==="e" && level===503){
                     player.inventory.push(new Potion(item.x,item.y*(player.inventory.length+1),item.width,item.height,4,20));
                     inventory.activated=true;
@@ -312,6 +390,17 @@ function DrawstructuresCollision(){
 
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
+
+            if (TileToPlayerCollsion(enemy.x,enemy.y,enemy.width,enemy.height,x,y)){
+                enemy.positionArray.x=f;
+                enemy.positionArray.y=i;
+            }
+            if (TileToPlayerCollsion(player.x,player.y,player.width,player.height,x,y)){
+                player.positionArray.x=f;
+                player.positionArray.y=i;
+            }
+
+
             if (x>=canvas.width-1){
 
                 y+=tiles.height
@@ -360,16 +449,20 @@ function DrawstructuresCollision(){
 function quadrantePlayerAoInimigo(){
 
     if (enemy.x > player.x && enemy.y>player.y){
-        alert("Player no canto superior esquerdo do inimigo")
+        return 2
     }
-    if (enemy.x < player.x && enemy.y>player.y){
-        alert("Player no canto superior direito do inimigo")
+   else if (enemy.x < player.x && enemy.y>player.y){
+        return 1
     }
-    if (enemy.x < player.x && enemy.y<player.y){
-        alert("Player no canto inferior direito do inimigo")
+   else if (enemy.x < player.x && enemy.y<player.y){
+        return 4
     }
-    if (enemy.x > player.x && enemy.y<player.y){
-        alert("Player no canto inferior esquerdo do inimigo")
+    else if (enemy.x > player.x && enemy.y<player.y){
+      return 3
+    }
+
+    else {
+        return 0
     }
 
 }
