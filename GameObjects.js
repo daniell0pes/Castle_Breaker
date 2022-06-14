@@ -355,7 +355,7 @@ class Enemy extends AnimatedSprite{
         this.boss = boss
     }
     idle(){
-        this.draw(this.spriteIndex)
+        this.draw(5);
         this.update();
         if (collision(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2,this.x-this.radius/1.5,this.y-this.radius/1.5,this.radius*3,this.radius*3)){
             this.goAfter=true

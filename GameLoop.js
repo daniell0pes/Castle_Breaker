@@ -1,6 +1,6 @@
 const map = new Level(0,0,canvas.width,canvas.height);
 const foreground = new Level(0,0,canvas.width,canvas.height);
-const player = new Player(220,canvas.height/1.5,150,150);
+const player = new Player(220,canvas.height/1.5,(canvas.width*150)/1536,(canvas.height*150)/731);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 let npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
@@ -37,7 +37,7 @@ playerattack.load(15,5,playerattack.images,"Assets/Homer/attack/atack_down.png",
 
 npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
 
-enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png");
+enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png");
 
 inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png",
     "Assets/Inventory/potion1.png","Assets/Inventory/potion2.png","Assets/Inventory/elixir.png","Assets/Inventory/sword2.png","Assets/Inventory/shield2.png");

@@ -53,7 +53,6 @@ class Potion extends Item{
         super.equip();
         player.life += this.hp;
     }
-
 }
 
 class Shield extends Potion{
