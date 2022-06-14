@@ -258,6 +258,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
     if(level == 503 || level == 505|| level == 506 ) {
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
+
             eButton.interactAction=true
         }
 

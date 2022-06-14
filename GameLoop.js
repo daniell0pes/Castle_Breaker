@@ -82,7 +82,7 @@ if (enemy!=null){
     inventory.drawInventory();
     Hp();
         eButton.update()
-playerDeath()
+//playerDeath()
 
         if (enemy!=null){
             enemiesHpDraw(enemy.life,enemy.maxLife,enemy.x+enemy.width/6,enemy.y)
