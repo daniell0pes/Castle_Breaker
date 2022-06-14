@@ -174,6 +174,9 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 1) {
                     player.x=canvas.width - tiles.width*5;
                     player.y =(tiles.height*9)-player.height;
+                  npc =  new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
+                    npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
+
                 }
                 if(level === 4) {
                     player.x=canvas.width-player.width-tiles.width*13;
@@ -189,6 +192,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 1) {
                     player.x=tiles.width*5;
                     player.y =(tiles.height*8)-player.height;
+                    npc =  new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
+                    npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
                 }
                 if(level === 6) {
                     player.x=canvas.width-player.width-tiles.width*13;
@@ -258,11 +263,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
     if(level == 503 || level == 505|| level == 506 ) {
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
-
             eButton.interactAction=true
         }
-
-
         }
 
 
