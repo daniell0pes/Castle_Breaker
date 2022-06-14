@@ -10,12 +10,15 @@ const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
 const eButton = new Interact(player.x,player.y,30,30);
 const dialogBox = new Dialog((canvas.width*168)/1536,(canvas.height*411)/731,(canvas.width*1200)/1536,(canvas.height*300)/731);
-
+const enemyAttack = new EnemyStance(enemy.x,enemy.y,enemy.width,enemy.height);
 
 dialogBox.load("Assets/Dialog/dialogbox.png");
 eButton.load("Assets/Interact/Interagir.png")
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
+
+enemyAttack.load(15,5,enemyAttack.images,"Assets/Enemy/attack/attack_down.png","Assets/Enemy/attack/attack_left.png",
+    "Assets/Enemy/attack/attack_right.png","Assets/Enemy/attack/attack_up.png");
 
 player.load(30,6,player.images,"Assets/Homer/idle/idle_down.png", "Assets/Homer/idle/idle_left.png",
     "Assets/Homer/idle/idle_right.png", "Assets/Homer/idle/idle_up.png", 'Assets/Homer/walk/walk_down.png', 'Assets/Homer/walk/walk_left.png', 'Assets/Homer/walk/walk_right.png',
@@ -51,6 +54,7 @@ function animate(){
 
     generateCharacters();
     playerStateSetter(attackTimeOut);
+    enemyStateSetter(enemy.attackTimeout);
 
 
 
@@ -60,9 +64,6 @@ if (enemy!=null){
     enemy=null
 }}
 //structuresCollision(player.x,player.y,player.width,player.height)
-        if (enemy!=null){
-     enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
-        }
     foreground.draw(player.level)
     inventory.drawInventory();
     Hp();

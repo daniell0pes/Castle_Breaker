@@ -93,6 +93,17 @@ function playerStateSetter(attackMode){
     }
 }
 
+function enemyStateSetter(attackMode){
+    if(attackMode){
+        enemyAttack.draw(enemyAttack.spriteIndex);
+        enemyAttack.update()
+    }else{
+        if (enemy!=null){
+            enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
+        }
+    }
+}
+
 
 function generateCharacters() {
 

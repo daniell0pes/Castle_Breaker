@@ -314,7 +314,6 @@ class Enemy extends AnimatedSprite{
         console.log(this.direction+ " " +this.spriteIndex);
 
         if (collision(player.x,player.y,player.width,player.height,this.x+this.width/2,this.y+this.height/2,this.width-this.width/2,this.height-this.height/2)){
-
             this.attack()
 
         }
@@ -385,13 +384,24 @@ class Enemy extends AnimatedSprite{
     }
 
     attack(){
+        if(player.direction==="down"){
+            enemyAttack.spriteIndex=4;
+        }else if(player.direction==="left"){
+            enemyAttack.spriteIndex=3;
+        }else if(player.direction==="right"){
+            enemyAttack.spriteIndex=2;
+        }else if(player.direction==="right"){
+            enemyAttack.spriteIndex=1;
+        }
+
         if (!this.attackTimeout){
-            this.attacks.push(new Attack(this.x-30,this.y,this.width+30,this.height+20))
             this.attackTimeout=true
-            attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
+            setTimeout(()=>{
+                this.attacks.push(new Attack(this.x-30,this.y,this.width+30,this.height+20))
+                attackToPlayer(this.attacks[this.attacks.length-1].x,this.attacks[this.attacks.length-1].y,this.attacks[this.attacks.length-1].width,this.attacks[this.attacks.length-1].height)
+            },1000)
 
             this.timeout()
-
         }
 
     }
@@ -400,9 +410,18 @@ class Enemy extends AnimatedSprite{
         setTimeout(() => {
             this.attackTimeout = false;
 
-
         }, 1500)
     }
+}
 
+class EnemyStance extends AnimatedSprite{
+    constructor(x,y,width,height) {
+        super(x,y,width,height);
 
+        this.spriteIndex=1;
+    }
+    draw() {
+        ctx.drawImage(this.images[this.spriteIndex-1], this.sx, this.sy, this.slice.width, this.slice.height,
+            enemy.x, enemy.y, this.width, this.height);
+    }
 }
