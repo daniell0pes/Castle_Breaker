@@ -154,14 +154,15 @@ function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
 function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
     if(level === 1 ||  level === 2 || level === 3 || level === 4 || level === 5 || level === 6 || level === 7) {
         if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
+            enemy=null
+            npc=null
             if (player.level===1){
 
                 if(level === 2) {
                     player.x=canvas.width-player.width-tiles.width*3;
                     player.y = canvas.height-player.height-tiles.height*2
-
-                    enemy = new Enemy(tiles.width*7,tiles.height*6,64,64,100,10)
-                    enemy.load("Assets/Donut.png")
+                    enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
                 }
                 if(level === 3) {
                     player.x=canvas.width-player.width-tiles.width*13;
@@ -186,7 +187,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
             if (player.level===3){
 
                 if(level === 1) {
-                    player.x=tiles.width*4;
+                    player.x=tiles.width*5;
                     player.y =(tiles.height*8)-player.height;
                 }
                 if(level === 6) {
@@ -200,10 +201,16 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 2) {
                     player.x=tiles.width*9;
                     player.y =tiles.height*1.5;
+                    enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100,false);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
                     player.y =tiles.height*15;
+                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+
                 }
             }
             if (player.level===5){
@@ -211,10 +218,16 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 2) {
                     player.x=tiles.width*22;
                     player.y =tiles.height*1.5;
+                    enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100,false);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
                     player.y =tiles.height*15;
+                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+
                 }
             }
             if (player.level===6){
@@ -228,6 +241,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.y = tiles.height*5.5
                 }
             }
+
             player.level= level;
             map.init(player.level)
             generateMap()
@@ -238,30 +252,18 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
             }
 
 
-        }
-    if(level == 503 || level == 505|| level == 506) {
 
-        if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
+
+        }
+    if(level == 503 || level == 505|| level == 506 ) {
+
+        if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
             eButton.interactAction=true
-            for (let i =0;i<keys.length-1;i++) {
-                if(keys[i]==="e" && level===503){
-                    player.inventory.push(new Potion(item.x,item.y*(player.inventory.length+1),item.width,item.height,4,20));
-                    inventory.activated=true;
-
-                }else if(keys[i]==="e" && level===505){
-                    player.inventory.push(new Shield(item.x,item.y*(player.inventory.length+1),item.width,item.height,7,20));
-                    inventory.activated=true;
-                }else if(keys[i]==="e" && level===506){
-                    player.inventory.push(new Elixir(item.x,item.y*(player.inventory.length+1),item.width,item.height,5,20));
-                    inventory.activated=true;
-                }
-            }
-        }
-        else {
-            eButton.interactAction=false
         }
 
-    }
+
+        }
+
 
 
 }
@@ -280,19 +282,19 @@ function structuresCollision(X,Y,Width,Height,type){
                 tileX=0
             }
 
-            if (type instanceof Player){
+            if (type instanceof Player  ){
 
-
+if (player.level===1){
                 if (collision(player.x,player.y,player.width,player.height,npc.x+npc.width/2,npc.y+npc.height/2,npc.width-npc.width/1.3,npc.height-npc.height/2)){
 
-
+                    eButton.interactAction=true
 
 
                 }
                 else{
 
-
-                }
+                    eButton.interactAction=false
+                }}
                 roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
             }
 
@@ -322,6 +324,21 @@ function Hp(){
     ctx.fillRect(0,0,player.life*4,20)
     ctx.strokeStyle= "Gold"; //set the color of the stroke line
     ctx.strokeRect(0,0,400,20)
+}
+
+function enemiesHpDraw(life,MaxLife,x,y){
+   if (!enemy.boss){
+    ctx.fillStyle="red";
+    ctx.fillRect(x,y,MaxLife,5)
+    ctx.fillStyle="green";
+    ctx.fillRect(x,y,life,5)}
+    else{
+        ctx.fillStyle="red";
+        ctx.fillRect(0,canvas.height -20,MaxLife *4,20)
+        ctx.fillStyle="green";
+        ctx.fillRect(0,canvas.height -20,life*4,20)
+    }
+
 }
 
 
@@ -371,11 +388,11 @@ function DrawstructuresCollision(){
 
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
-
-            if (TileToPlayerCollsion(enemy.x,enemy.y,enemy.width,enemy.height,x,y)){
+            if(enemy!=null){
+            if (TileToPlayerCollsion(enemy.x,enemy.y,enemy.width,enemy.height,x,y) ){
                 enemy.positionArray.x=f;
                 enemy.positionArray.y=i;
-            }
+            }}
             if (TileToPlayerCollsion(player.x,player.y,player.width,player.height,x,y)){
                 player.positionArray.x=f;
                 player.positionArray.y=i;
@@ -451,11 +468,46 @@ function quadrantePlayerAoInimigo(){
 
 
 
+function playSong() {
+    if (enemy!=null ){
+        if (player.level===7){
+            finalBattle.play()
+            audio.pause()
+            battles.pause()
+        }
+        if (player.level!=7){
+            if(enemy.goAfter===true){
+
+                battles.play()
+                audio.pause()
+            }
+
+        }
+    }
+
+    if (enemy==null){
+        battles.currentTime=0
+        audio.play();
+        battles.pause()
+        finalBattle.pause()
+    }
+    else if (!enemy.goAfter) {
+        battles.currentTime=0
+        audio.play();
+        battles.pause()
+        finalBattle.pause()
+    }
+}
 
 
 
+function playerDeath(){
 
+    if (player.life<=0){
 
+document.querySelector("body").style.opacity=0.5;
+    }
+}
 
 
 

@@ -2,7 +2,7 @@ const map = new Level(0,0,canvas.width,canvas.height);
 const foreground = new Level(0,0,canvas.width,canvas.height);
 const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
-const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
+let npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
 let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
@@ -12,6 +12,13 @@ const eButton = new Interact(player.x,player.y,30,30);
 const dialogBox = new Dialog((canvas.width*168)/1536,(canvas.height*411)/731,(canvas.width*1200)/1536,(canvas.height*300)/731);
 const enemyAttack = new EnemyStance(enemy.x,enemy.y,enemy.width,enemy.height);
 
+
+var audio = new Audio('Assets/Audio/CastleBreakerTheme.wav');
+var finalBattle = new Audio('Assets/Audio/Battle-Furious.mp3')
+var battles = new Audio('Assets/Audio/8bit-Battle01.mp3')
+
+finalBattle.volume=0.5
+battles.volume=0.5
 dialogBox.load("Assets/Dialog/dialogbox.png");
 eButton.load("Assets/Interact/Interagir.png")
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png","Assets/room7.png");
@@ -46,17 +53,21 @@ generateMap()
 const fps=30;
 
 function animate(){
+
+
     setTimeout(function () {
     requestAnimationFrame(animate);
-
+    DrawstructuresCollision();
     ctx.clearRect(0,0,canvas.width,canvas.height);
     map.draw(player.level);
 
     generateCharacters();
-    ctx.fillRect(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2)
-    ctx.fillRect(enemy.x-enemy.radius/1.5,enemy.y-enemy.radius/1.5,enemy.radius*3,enemy.radius*3)
+   // ctx.fillRect(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2)
+    //ctx.fillRect(enemy.x-enemy.radius/1.5,enemy.y-enemy.radius/1.5,enemy.radius*3,enemy.radius*3)
+        //ctx.fillRect(player.x,player.y,player.width,player.height)
+        //ctx.fillRect(npc.x,npc.y,npc.width,npc.height)
     playerStateSetter(attackTimeOut);
-    enemyStateSetter(enemy.attackTimeout);
+
 
 
 
@@ -64,13 +75,18 @@ if (enemy!=null){
         if (enemy.life<=0){
 
     enemy=null
-}}
+}
+    enemyStateSetter(enemy.attackTimeout);}
 //structuresCollision(player.x,player.y,player.width,player.height)
     foreground.draw(player.level)
     inventory.drawInventory();
     Hp();
         eButton.update()
+playerDeath()
 
+        if (enemy!=null){
+            enemiesHpDraw(enemy.life,enemy.maxLife,enemy.x+enemy.width/6,enemy.y)
+        }
         //console.log("Espaços á direita -   "+rightPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
         //console.log("Espaços á esquerda -   "+leftPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
 
@@ -82,7 +98,7 @@ if (enemy!=null){
    /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()
     })*/
-    DrawstructuresCollision();
+playSong()
     }, 1000/fps);
 }
 

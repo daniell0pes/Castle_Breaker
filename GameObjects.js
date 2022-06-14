@@ -291,7 +291,7 @@ class Dialog extends Sprite{
 
 
 class Enemy extends AnimatedSprite{
-    constructor(x,y,width,height,life,damage,radius) {
+    constructor(x,y,width,height,life,damage,radius,boss) {
         super(x,y,width,height)
         this.damage = damage;
         this.life=life
@@ -306,6 +306,7 @@ class Enemy extends AnimatedSprite{
             x:10,
             y:10
         }
+        this.boss = boss
     }
     idle(){
         this.draw(this.spriteIndex)
@@ -431,6 +432,6 @@ class EnemyStance extends AnimatedSprite{
     }
     draw() {
         ctx.drawImage(this.images[this.spriteIndex-1], this.sx, this.sy, this.slice.width, this.slice.height,
-            enemy.x, enemy.y, this.width, this.height);
+            enemy.x, enemy.y, enemy.width, enemy.height);
     }
 }
