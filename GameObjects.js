@@ -291,11 +291,13 @@ class Dialog extends Sprite{
 
 
 class Enemy extends AnimatedSprite{
-    constructor(x,y,width,height,life,damage) {
+    constructor(x,y,width,height,life,damage,radius) {
         super(x,y,width,height)
         this.damage = damage;
         this.life=life
         this.maxLife=life
+        this.radius=radius
+        this.goAfter=false
         this.attacks=[]
         this.attackTimeout=false;
         this.direction = "down";
@@ -303,6 +305,13 @@ class Enemy extends AnimatedSprite{
         this.positionArray={
             x:10,
             y:10
+        }
+    }
+    idle(){
+        this.draw(this.spriteIndex)
+        this.update();
+        if (collision(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2,this.x-this.radius/1.5,this.y-this.radius/1.5,this.radius*3,this.radius*3)){
+            this.goAfter=true
         }
     }
 
@@ -313,13 +322,13 @@ class Enemy extends AnimatedSprite{
 
         console.log(this.direction+ " " +this.spriteIndex);
 
-        if (collision(player.x,player.y,player.width,player.height,this.x+this.width/2,this.y+this.height/2,this.width-this.width/2,this.height-this.height/2)){
+        if (collision(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2,this.x+this.width/4,this.y+this.height/4,this.width-this.width/2,this.height-this.height/2)){
             this.attack()
 
         }
          else
          {
-             if (!structuresCollision(this.x + Math.cos(angle) * 2,this.y + Math.sin(angle) * 2  ,this.width,this.height,enemy)) {
+             if (!structuresCollision(this.x + Math.cos(angle) * 2 +this.width/4,this.y + Math.sin(angle) * 2 +this.height/4  ,this.width -this.width/2,this.height-this.height/2,enemy)) {
                  this.x += Math.cos(angle) * 2
                  this.y += Math.sin(angle) * 2
                  if (quadrantePlayerAoInimigo() == 1 || quadrantePlayerAoInimigo() == 4) {
@@ -333,21 +342,21 @@ class Enemy extends AnimatedSprite{
              else{
                  if (quadrantePlayerAoInimigo()==3||quadrantePlayerAoInimigo()==4){
 
-                    if (rightPathPossible(this.positionArray.x,this.positionArray.y) <= leftPathPossible(this.positionArray.x,this.positionArray.y)){
-                        if (structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                    if (rightPathPossible(this.positionArray.x,this.positionArray.y-1) <= leftPathPossible(this.positionArray.x,this.positionArray.y-1)){
+                        if (structuresCollision(this.x+this.width/4 ,this.y + 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                         this.x +=2
                             this.direction="right";
                             this.spriteIndex=3;
                         }
                     }
-                    if (rightPathPossible(this.positionArray.x,this.positionArray.y) > leftPathPossible(this.positionArray.x,this.positionArray.y)){
-                        if (structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                    if (rightPathPossible(this.positionArray.x,this.positionArray.y-1) > leftPathPossible(this.positionArray.x,this.positionArray.y-1)){
+                        if (structuresCollision(this.x+this.width/4 ,this.y + 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                             this.x -=2
                             this.direction="left";
                             this.spriteIndex=2;
                         }
                     }
-                    if (!structuresCollision(this.x ,this.y +  2  ,this.width,this.height,enemy)){
+                    if (!structuresCollision(this.x+this.width/4 ,this.y + 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                         this.y+=2
                         this.direction="down";
                         this.spriteIndex=1;
@@ -357,7 +366,7 @@ class Enemy extends AnimatedSprite{
                  if (quadrantePlayerAoInimigo()==1||quadrantePlayerAoInimigo()==2){
 
                      if (rightPathPossible(this.positionArray.x,this.positionArray.y-4) <= leftPathPossible(this.positionArray.x,this.positionArray.y-4)){
-                         if (structuresCollision(this.x ,this.y -  2  ,this.width,this.height,enemy)){
+                         if (structuresCollision(this.x+this.width/4 ,this.y - 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                              this.x +=2
                              this.direction="right";
                              this.spriteIndex=3;
@@ -365,14 +374,14 @@ class Enemy extends AnimatedSprite{
 
                      }
                      if (rightPathPossible(this.positionArray.x,this.positionArray.y-4) > leftPathPossible(this.positionArray.x,this.positionArray.y-4)){
-                         if (structuresCollision(this.x ,this.y -  2  ,this.width,this.height,enemy)){
+                         if (structuresCollision(this.x+this.width/4 ,this.y - 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                              this.x -=2
                              this.direction="left";
                              this.spriteIndex=2;
                          }
 
                      }
-                     if (!structuresCollision(this.x ,this.y - 2  ,this.width,this.height,enemy)){
+                     if (!structuresCollision(this.x+this.width/4 ,this.y - 2 +this.height/4  ,this.width-this.width/2,this.height-this.height/2,enemy)){
                          this.y-=2
                          this.direction="up";
                          this.spriteIndex=4;

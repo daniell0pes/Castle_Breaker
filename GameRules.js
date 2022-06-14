@@ -31,11 +31,11 @@ function rightPathPossible(i,f) {
 
   for (let x=i;x<30;x++){
 
-      if (levelNow[f+1][x]===10){
+      if (levelNow[f][x]===10){
 
             contadorDeEspacos++
       }
-      if (levelNow[f+1][x]===0){
+      if (levelNow[f][x]===0){
 
           return contadorDeEspacos
       }
@@ -48,11 +48,11 @@ function leftPathPossible(i,f) {
 
     for (let x=i;x>0;x--){
 
-        if (levelNow[f+1][x]===10){
+        if (levelNow[f][x]===10){
 
             contadorDeEspacosEsquerda++
         }
-        if (levelNow[f+1][x]===0){
+        if (levelNow[f][x]===0){
 
             return contadorDeEspacosEsquerda
         }
@@ -99,7 +99,11 @@ function enemyStateSetter(attackMode){
         enemyAttack.update()
     }else{
         if (enemy!=null){
-            enemy.chase(Math.atan2(player.y+player.height/2-enemy.y,player.x + player.width/2 - enemy.x))
+            if (enemy.goAfter){
+            enemy.chase(Math.atan2((player.y+player.height/2)-(enemy.y+enemy.height/4),(player.x + player.width/2) - (enemy.x + enemy.width/4)))}
+            else {
+                enemy.idle()
+            }
         }
     }
 }
@@ -198,7 +202,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.y =tiles.height*1.5;
                 }
                 if(level === 7) {
-
+                    player.x=tiles.width*14;
+                    player.y =tiles.height*15;
                 }
             }
             if (player.level===5){
@@ -208,7 +213,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.y =tiles.height*1.5;
                 }
                 if(level === 7) {
-
+                    player.x=tiles.width*14;
+                    player.y =tiles.height*15;
                 }
             }
             if (player.level===6){

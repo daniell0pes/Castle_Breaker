@@ -4,7 +4,7 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*3,player.width,player.height,100,10);
+let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
@@ -14,8 +14,8 @@ const enemyAttack = new EnemyStance(enemy.x,enemy.y,enemy.width,enemy.height);
 
 dialogBox.load("Assets/Dialog/dialogbox.png");
 eButton.load("Assets/Interact/Interagir.png")
-map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
-foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
+map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png","Assets/room7.png");
+foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png","Assets/room7foreground.png")
 
 enemyAttack.load(15,5,enemyAttack.images,"Assets/Enemy/attack/attack_down.png","Assets/Enemy/attack/attack_left.png",
     "Assets/Enemy/attack/attack_right.png","Assets/Enemy/attack/attack_up.png");
@@ -53,6 +53,8 @@ function animate(){
     map.draw(player.level);
 
     generateCharacters();
+    ctx.fillRect(player.x+player.width/4,player.y +player.height/4,player.width-player.width/2,player.height-player.height/2)
+    ctx.fillRect(enemy.x-enemy.radius/1.5,enemy.y-enemy.radius/1.5,enemy.radius*3,enemy.radius*3)
     playerStateSetter(attackTimeOut);
     enemyStateSetter(enemy.attackTimeout);
 
