@@ -290,6 +290,7 @@ class Dialog extends Sprite{
 }
 
 
+
 class Enemy extends AnimatedSprite{
     constructor(x,y,width,height,life,damage,radius,boss) {
         super(x,y,width,height)

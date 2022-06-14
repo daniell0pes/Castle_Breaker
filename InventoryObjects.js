@@ -35,9 +35,9 @@ class Sword extends Item{
     }
 }
 
-class Elixir extends Sword{
+class Elixir extends Item{
     constructor(x,y,width,height,id,damage) {
-        super(x,y,width,height);
+        super(x,y,width,height,id);
 
         this.damage = damage;
     }

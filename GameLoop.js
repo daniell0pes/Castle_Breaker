@@ -4,18 +4,19 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 let npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100);
+let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,100,100);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
 const eButton = new Interact(player.x,player.y,30,30);
 const dialogBox = new Dialog((canvas.width*168)/1536,(canvas.height*411)/731,(canvas.width*1200)/1536,(canvas.height*300)/731);
 const enemyAttack = new EnemyStance(enemy.x,enemy.y,enemy.width,enemy.height);
-
+let animationId
 
 var audio = new Audio('Assets/Audio/CastleBreakerTheme.wav');
 var finalBattle = new Audio('Assets/Audio/Battle-Furious.mp3')
 var battles = new Audio('Assets/Audio/8bit-Battle01.mp3')
+var death = new Audio('Assets/Audio/GameOverMan.wav')
 
 finalBattle.volume=0.5
 battles.volume=0.5
@@ -56,7 +57,7 @@ function animate(){
 
 
     setTimeout(function () {
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
     DrawstructuresCollision();
     ctx.clearRect(0,0,canvas.width,canvas.height);
     map.draw(player.level);
@@ -82,7 +83,7 @@ if (enemy!=null){
     inventory.drawInventory();
     Hp();
         eButton.update()
-//playerDeath()
+playerDeath()
 
         if (enemy!=null){
             enemiesHpDraw(enemy.life,enemy.maxLife,enemy.x+enemy.width/6,enemy.y)

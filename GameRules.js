@@ -181,10 +181,14 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 4) {
                     player.x=canvas.width-player.width-tiles.width*13;
                     player.y = canvas.height-player.height-tiles.height
+                    enemy = new Enemy((canvas.width/2) ,(canvas.height/2),player.width,player.height,100,10,100,false);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+
                 }
                 if(level === 5) {
                     player.x=canvas.width-player.width-tiles.width*13;
                     player.y = canvas.height-player.height-tiles.height
+
                 }
             }
             if (player.level===3){
@@ -264,6 +268,9 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
             eButton.interactAction=true
+        }
+        else {
+            eButton.interactAction=false
         }
         }
 
@@ -507,10 +514,29 @@ function playSong() {
 function playerDeath(){
 
     if (player.life<=0){
+        cancelAnimationFrame(animationId)
+        enemy=null
+        battles.pause()
+        finalBattle.pause()
+        audio.pause()
+        death.play()
 
-document.querySelector("body").style.opacity=0.5;
+
+
+
+
+       let body = document.querySelector("body")
+        let opacity = Number(window.getComputedStyle(body).getPropertyValue("opacity"))
+        setInterval(() => {
+
+            if(opacity>0){
+                opacity=opacity-0.25;
+                body.style.background="black"
+                body.style.opacity=opacity
+            }
+        }, 80)
+
     }
 }
-
 
 
