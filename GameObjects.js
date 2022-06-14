@@ -2,6 +2,9 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+/*
+Definição e atribuição da API canvas
+*/
 
 class GameObject extends EventTarget { //EventTarget por causa dos listeners
 
@@ -22,6 +25,10 @@ class GameObject extends EventTarget { //EventTarget por causa dos listeners
         // a redefinir nas classes derivadas
     }
 }
+
+/*
+GameObject, objetos de jogo
+ */
 
 class Sprite extends GameObject {
     constructor( x, y, width, height ) {
@@ -54,6 +61,10 @@ class Sprite extends GameObject {
         })
     }
 }
+
+/*
+Objetos que derivem desta classe vão conter imagens estáticas
+ */
 
 class AnimatedSprite extends Sprite {
     constructor(x, y, width, height) {
@@ -117,6 +128,10 @@ class AnimatedSprite extends Sprite {
     }
 }
 
+/*
+AnimatedSprite, classes derivadas vão conter imagens animadas
+ */
+
 class Level extends Sprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
@@ -133,6 +148,10 @@ class Level extends Sprite{
         this.colisionsArray = levels[level-1];
     }
 }
+
+/*
+Level, é uma classe usada para o desenho dos niveis
+ */
 
 class Player extends AnimatedSprite{
 
@@ -189,6 +208,10 @@ class Player extends AnimatedSprite{
 
 }
 
+/*
+Classe Player, é a classe que contém o jogador bem como os seus métodos, movimentado pelo o utilizador.
+ */
+
 class playerStance extends Player{
     constructor(x,y,width,height) {
         super(x,y,width,height);
@@ -206,6 +229,9 @@ class playerStance extends Player{
         attackToEnemy()
     }
 }
+/*
+Classe playerStance faz parte do jogador e é definida de forma a que o jogador tenha um comportamento diferente durante a batalha com os inimigos
+ */
 
 class Inventory extends Sprite {
     constructor(x, y, width, height) {
@@ -233,6 +259,10 @@ class Inventory extends Sprite {
     }
 }
 
+/*
+Inventário do jogador, armazena itens que o jogador vá recolhendo ao longo do jogo
+ */
+
 // Non Playable Character
 class Npc extends AnimatedSprite{
     constructor(x,y,width,height) {
@@ -240,6 +270,10 @@ class Npc extends AnimatedSprite{
 
     }
 }
+
+/*
+    Simples desenho de uma criatura usada para interagir com o jogador
+ */
 
 class Interact extends Sprite{
     constructor(x,y,width,height) {
@@ -252,10 +286,15 @@ class Interact extends Sprite{
         if (this.interactAction){
         this.draw()
         this.x=player.x
-        this.y=player.y}
+        this.y=player.y
+        }
     }
 
 }
+
+/*
+Definição de interação do jogador com objetos e NPC´s.
+ */
 
 class Attack extends GameObject{
     constructor(x,y,width,height) {
@@ -267,6 +306,10 @@ class Attack extends GameObject{
     }
 
 }
+
+/*
+Classe que é instanciada cada vez que o jogador faz um ataque de forma a ter forma de registar colisão dos mesmos com os inimigos
+ */
 
 class Dialog extends Sprite{
     constructor(x,y,width,height){
@@ -288,7 +331,9 @@ class Dialog extends Sprite{
         }
     }
 }
-
+/*
+Classe em desenvolvimento..., o propósito da mesma era criar caixas de diálogo com os NPC´s
+ */
 
 
 class Enemy extends AnimatedSprite{
@@ -425,6 +470,10 @@ class Enemy extends AnimatedSprite{
     }
 }
 
+/*
+Classe inimigo, e respetivos métodos, incluem-se métodos de path finding para preseguir e atacar o jogador
+ */
+
 class EnemyStance extends AnimatedSprite{
     constructor(x,y,width,height) {
         super(x,y,width,height);
@@ -436,3 +485,6 @@ class EnemyStance extends AnimatedSprite{
             enemy.x, enemy.y, enemy.width, enemy.height);
     }
 }
+/*
+Classe para os comportamentos de ataque do inimigo
+ */

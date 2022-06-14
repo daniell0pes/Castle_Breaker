@@ -264,9 +264,9 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
 
         }
-    if(level == 503 || level == 505|| level == 506 ) {
+    if(level == 503 || level == 505|| level == 506 || player.level===1) {
 
-        if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
+        if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
             eButton.interactAction=true
         }
         else {
@@ -304,6 +304,7 @@ if (player.level===1){
                 else{
 
                     eButton.interactAction=false
+
                 }}
                 roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
             }
@@ -386,9 +387,18 @@ function addItem(key){
     }else if(key==="e" && player.level===6){
         player.inventory.push(new Elixir(item.x,item.y*(player.inventory.length+1),item.width,item.height,5,20));
         inventory.activated=true;
+    }else if(key==="e" && player.level===1){
+        /*
+        let body = document.querySelector("body");
+        let textarea = document.createElement("input");
+        textarea.setAttribute("type", "text");
+        body.appendChild(textarea).id="textbox";
+        textarea.textContent="Escreve o teu nome";
+        textarea.style.top = npc.y + "px";
+        textarea.style.left = npc.x + "px";
+         */
     }
 }
-
 
 //para propósito de testes
 function DrawstructuresCollision(){
@@ -432,10 +442,8 @@ function DrawstructuresCollision(){
 
                 }
  if(levelNow[i][f] == 503) {
-
                     ctx.fillStyle='pink';
                     ctx.fillRect(x,y,tiles.width,tiles.height);
-
 
                 }
             if(levelNow[i][f] == 6) {

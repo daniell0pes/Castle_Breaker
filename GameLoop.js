@@ -104,3 +104,7 @@ playSong()
 }
 
 animate();
+
+/*
+Loop do jogo, bem como instancias de classes e carregamento de Assets necessários
+ */
