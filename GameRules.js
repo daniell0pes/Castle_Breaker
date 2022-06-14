@@ -162,11 +162,11 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.x=canvas.width-player.width-tiles.width*3;
                     player.y = canvas.height-player.height-tiles.height*2
                     enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
                 }
                 if(level === 3) {
                     player.x=canvas.width-player.width-tiles.width*13;
-                    player.y = canvas.height-player.height
+                    player.y = canvas.height-player.height-tiles.height;
                 }
             }
             if (player.level===2){
@@ -174,7 +174,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 1) {
                     player.x=canvas.width - tiles.width*5;
                     player.y =(tiles.height*9)-player.height;
-                  npc =  new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
+                    npc =  new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
                     npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
 
                 }
@@ -182,7 +182,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.x=canvas.width-player.width-tiles.width*13;
                     player.y = canvas.height-player.height-tiles.height
                     enemy = new Enemy((canvas.width/2) ,(canvas.height/2),player.width,player.height,100,10,100,false);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
                 if(level === 5) {
@@ -201,7 +201,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 }
                 if(level === 6) {
                     player.x=canvas.width-player.width-tiles.width*13;
-                    player.y = canvas.height-player.height-tiles.height*2
+                    player.y = canvas.height-player.height-tiles.height*3
                 }
             }
 
@@ -211,14 +211,14 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.x=tiles.width*9;
                     player.y =tiles.height*1.5;
                     enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100,false);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
                     player.y =tiles.height*15;
                     enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
             }
@@ -233,14 +233,14 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                     player.x=tiles.width*22;
                     player.y =tiles.height*1.5;
                     enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*5,player.width,player.height,100,10,100,false);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
                     player.y =tiles.height*15;
                     enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
-                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png")
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
             }
@@ -269,7 +269,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
 
         }
-    if(level == 503 || level == 505|| level == 506 ) {
+    if(level == 503 || level == 505|| level == 506) {
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY) ){
             eButton.interactAction=true
@@ -289,8 +289,6 @@ function structuresCollision(X,Y,Width,Height,type){
     for (let i =0;i<levelNow.length;i++){
         for (let f=0;f<levelNow[0].length;f++){
 
-
-
             if (tileX>=canvas.width-1){
 
                 tileY+=tiles.height
@@ -303,28 +301,20 @@ if (player.level===1){
                 if (collision(player.x,player.y,player.width,player.height,npc.x+npc.width/2,npc.y+npc.height/2,npc.width-npc.width/1.3,npc.height-npc.height/2)){
 
                     eButton.interactAction=true
-
-
                 }
                 else{
 
                     eButton.interactAction=false
+
                 }}
                 roomPassAndInteract(levelNow[i][f],X,Y,Width,Height,tileX,tileY)
             }
-
-
-
                 if(levelNow[i][f] == 10) {
 
                     if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
                         return true;
                     }
-
                 }
-
-
-
             tileX+=tiles.width
 
         }
@@ -382,18 +372,32 @@ if (enemy.attacks!=[]){
 
 function addItem(key){
     if(key==="e" && player.level===3){
+        for(let i=0; i<player.inventory.length; i++){
+            if(player.inventory[i].id===4){
+                player.inventory.splice(i,1);
+            }
+        }
         player.inventory.push(new Potion(item.x,item.y*(player.inventory.length+1),item.width,item.height,4,20));
         inventory.activated=true;
 
     }else if(key==="e" && player.level===5){
+        for(let i=0; i<player.inventory.length; i++){
+            if(player.inventory[i].id===7){
+                player.inventory.splice(i,1);
+            }
+        }
         player.inventory.push(new Shield(item.x,item.y*(player.inventory.length+1),item.width,item.height,7,20));
         inventory.activated=true;
     }else if(key==="e" && player.level===6){
+        for(let i=0; i<player.inventory.length; i++){
+            if(player.inventory[i].id===5){
+                player.inventory.splice(i,1);
+            }
+        }
         player.inventory.push(new Elixir(item.x,item.y*(player.inventory.length+1),item.width,item.height,5,20));
         inventory.activated=true;
     }
 }
-
 
 //para propósito de testes
 function DrawstructuresCollision(){
@@ -437,10 +441,8 @@ function DrawstructuresCollision(){
 
                 }
  if(levelNow[i][f] == 503) {
-
                     ctx.fillStyle='pink';
                     ctx.fillRect(x,y,tiles.width,tiles.height);
-
 
                 }
             if(levelNow[i][f] == 6) {
@@ -529,9 +531,9 @@ function playerDeath(){
 
 
 
-     let body = document.querySelector("body")
+
+       let body = document.querySelector("body")
         let opacity = Number(window.getComputedStyle(body).getPropertyValue("opacity"))
-        alert(opacity)
         setInterval(() => {
 
             if(opacity>0){

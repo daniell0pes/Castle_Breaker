@@ -54,7 +54,6 @@ class Potion extends Item{
         player.life += this.hp;
         player.maxLife+=this.hp
     }
-
 }
 
 class Shield extends Potion{
@@ -125,3 +124,8 @@ class Check extends Sprite{
         ctx.drawImage(check.images[0], this.x, this.y, this.width, this.height);
     }
 }
+
+/*
+Classes respetivas ao sistema de inventário, seleção de itens, utilização e atribuição das suas caracteristicas ao jogador.
+Bem como definição e nuances de seleção de itens em si.
+ */
