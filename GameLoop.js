@@ -4,13 +4,15 @@ const player = new Player(220,canvas.height/1.5,150,150);
 const playerattack = new playerStance(player.x,player.y,player.width,player.height);
 const npc = new Npc((canvas.width/2)-50,(canvas.height/2)-40,200,200);
 const inventory = new Inventory((canvas.width*1000)/1536, (canvas.height*50)/731,(canvas.width*350)/1536,(canvas.height*600)/731);
-let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*3,64,64,100,10);
+let enemy = new Enemy((canvas.width/2) -tiles.width*3,(canvas.height/2)-tiles.height*3,player.width,player.height,100,10);
 const item = new Item((canvas.width*1028)/1536,(canvas.height*85)/731,(canvas.width*295)/1536,(canvas.height*80)/731);
 const selection = new Selection(item.x,item.y,item.width,item.height);
 const check = new Check();
-const eButton = new Interact(player.x,player.y,30,30)
+const eButton = new Interact(player.x,player.y,30,30);
+const dialogBox = new Dialog((canvas.width*168)/1536,(canvas.height*411)/731,(canvas.width*1200)/1536,(canvas.height*300)/731);
 
 
+dialogBox.load("Assets/Dialog/dialogbox.png");
 eButton.load("Assets/Interact/Interagir.png")
 map.load("Assets/room1.png","Assets/room2.png","Assets/room3.png","Assets/room4.png","Assets/room5.png","Assets/room6.png");
 foreground.load("Assets/room1foreground.png","Assets/room2foreground.png","Assets/room3foreground.png","Assets/room4foreground.png","Assets/room5foreground.png","Assets/room6foreground.png")
@@ -24,7 +26,7 @@ playerattack.load(15,5,playerattack.images,"Assets/Homer/attack/atack_down.png",
 
 npc.load(18,6,npc.images,"Assets/NPC/Golem/idle_down.png");
 
-enemy.load("Assets/Donut.png")
+enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png");
 
 inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","Assets/Inventory/shield1.png",
     "Assets/Inventory/potion1.png","Assets/Inventory/potion2.png","Assets/Inventory/elixir.png","Assets/Inventory/sword2.png","Assets/Inventory/shield2.png");
@@ -32,11 +34,8 @@ inventory.load("Assets/Inventory/inventory.png","Assets/Inventory/sword1.png","A
 player.inventory.push(new Sword(item.x,item.y,item.width,item.height,1,10),new Shield(item.x,item.y*2,item.width,item.height,2,10));
 
 check.load("Assets/Inventory/check.png");
+
 //enemy=null
-//Exemplo de adição de um item ao inventário
-//player.inventory.push(new Sword(item.x,item.y*(player.inventory.length+1),item.width,item.height,5,20));
-
-
 
 map.init(player.level)
 generateMap()
@@ -48,11 +47,12 @@ function animate(){
     requestAnimationFrame(animate);
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
-
     map.draw(player.level);
 
     generateCharacters();
     playerStateSetter(attackTimeOut);
+
+
 
 if (enemy!=null){
         if (enemy.life<=0){
@@ -68,10 +68,13 @@ if (enemy!=null){
     Hp();
         eButton.update()
 
+        //console.log("Espaços á direita -   "+rightPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
+        //console.log("Espaços á esquerda -   "+leftPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
 
-        console.log("Espaços á direita -   "+rightPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
-        console.log("Espaços á esquerda -   "+leftPathPossible(enemy.positionArray.x,enemy.positionArray.y-3))
-
+        //---------------------------//
+        //dialogBox.dialog=story_dialog[0];
+        //dialogBox.draw();
+        //---------------------------//
 
    /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()

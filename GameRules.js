@@ -99,10 +99,8 @@ function generateCharacters() {
     if (player.level == 1) {
         npc.draw(player.level);
         npc.update();
-
     }
 }
-
 
 function generateMap() {
     generateCollision()
@@ -227,7 +225,6 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
     if(level == 503 || level == 505|| level == 506) {
 
         if(TileToPlayerCollsion(X,Y,Width+50,Height+50,tileX,tileY)){
-
             eButton.interactAction=true
             for (let i =0;i<keys.length-1;i++) {
                 if(keys[i]==="e" && level===503){
@@ -302,14 +299,12 @@ function structuresCollision(X,Y,Width,Height,type){
 
 }
 function Hp(){
-
     ctx.fillStyle="red";
     ctx.fillRect(0,0,400,20)
     ctx.fillStyle="green";
     ctx.fillRect(0,0,player.life*4,20)
     ctx.strokeStyle= "Gold"; //set the color of the stroke line
     ctx.strokeRect(0,0,400,20)
-
 }
 
 
@@ -326,10 +321,6 @@ playerattack.attacks.splice(playerattack.attacks.length-1,1)
        enemy.y-=10}
        if (player.direction==="down"){
        enemy.y+=10}
-
-
-
-
 }}
 }
 function attackToPlayer(x,y,width,height){
