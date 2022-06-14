@@ -224,6 +224,11 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
             }
             if (player.level===5){
 
+                if (player.x>=canvas.width+player.width){
+
+                    enemy.x=0-player.width
+                }
+
                 if(level === 2) {
                     player.x=tiles.width*22;
                     player.y =tiles.height*1.5;
@@ -329,11 +334,11 @@ if (player.level===1){
 }
 function Hp(){
     ctx.fillStyle="red";
-    ctx.fillRect(0,0,400,20)
+    ctx.fillRect(0,0,player.maxLife*4,20)
     ctx.fillStyle="green";
     ctx.fillRect(0,0,player.life*4,20)
     ctx.strokeStyle= "Gold"; //set the color of the stroke line
-    ctx.strokeRect(0,0,400,20)
+    ctx.strokeRect(0,0,player.maxLife*4,20)
 }
 
 function enemiesHpDraw(life,MaxLife,x,y){
@@ -524,9 +529,9 @@ function playerDeath(){
 
 
 
-
-       let body = document.querySelector("body")
+     let body = document.querySelector("body")
         let opacity = Number(window.getComputedStyle(body).getPropertyValue("opacity"))
+        alert(opacity)
         setInterval(() => {
 
             if(opacity>0){

@@ -52,6 +52,7 @@ class Potion extends Item{
     equip(){
         super.equip();
         player.life += this.hp;
+        player.maxLife+=this.hp
     }
 
 }
@@ -65,6 +66,7 @@ class Shield extends Potion{
     unequip() {
         super.unequip();
         player.life = player.life - this.hp;
+        player.maxLife-=this.hp
     }
 }
 

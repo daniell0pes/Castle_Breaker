@@ -142,6 +142,7 @@ class Player extends AnimatedSprite{
         this.direction="right";
         this.state=3; //animação do jogador consoante a sua direção
         this.life=100
+        this.maxLife=100
         this.inventory=[];
         this.damage=10;
         this.positionArray={
