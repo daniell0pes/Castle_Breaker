@@ -1,10 +1,11 @@
+//tamanho de um tile, este vai ser dinâmico consoante a resolucão de cada pc
 const tiles = {
     width:canvas.width/30,
     height:canvas.height/20
 
 }
 let levelNow = []
-
+//função para o player ficar em estado idle
 function idle_setter(){
     switch(player.direction){
         case "down":
@@ -24,6 +25,7 @@ function idle_setter(){
         break;
     }
 }
+//função que analisa no array e conta os espaços necessários para passar a colisão á direita
 
 function rightPathPossible(i,f) {
     let contadorDeEspacos=0;
@@ -42,6 +44,8 @@ function rightPathPossible(i,f) {
   }
 return contadorDeEspacos
 }
+
+//função que analisa no array e conta os espaços necessários para passar a colisão á esquerda
 function leftPathPossible(i,f) {
     let contadorDeEspacosEsquerda=0;
     //console.log(levelNow[f+1][i])
@@ -62,6 +66,7 @@ function leftPathPossible(i,f) {
     return contadorDeEspacosEsquerda
 }
 
+//colisão da area de ataque do player consoante o lado em que ele ataca
 
 function attackDirection(attack) {
     if (player.direction=="right"){
@@ -83,7 +88,7 @@ function attackDirection(attack) {
 
     }
 }
-
+//função para decidir que estado do player é desenhado
 function playerStateSetter(attackMode){
     if(attackMode){
         playerattack.draw(player.state);
@@ -92,7 +97,7 @@ function playerStateSetter(attackMode){
         player.move(keys)
     }
 }
-
+//função para decidir que estado do inimigo é desenhado
 function enemyStateSetter(attackMode){
     if(attackMode){
         enemyAttack.draw(enemyAttack.spriteIndex);
@@ -121,6 +126,8 @@ function generateMap() {
     generateCollision()
     //generateCharacters()
 }
+
+//função fundamental que vai ao array que possui todas as colisões e igual o array LevelNow, que depois é dividido em 20 arrays
 function generateCollision() {
     levelNow=[]
     console.log(map.colisionsArray.length)
@@ -141,7 +148,7 @@ function collision(X,Y,Width,Height,SecondX,SecondY,SecondWidth,SecondHeight){
         return true;
     }
 }
-
+//colisão com tiles
 function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
     if(X <= tileX + tiles.width &&
         X + Width >= tileX &&
@@ -151,6 +158,7 @@ function TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY){
             return true;
     }
 }
+//função que serve para passar de mapa e interagir com itens, bem como gerar os inimigos e npcs
 function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
     if(level === 1 ||  level === 2 || level === 3 || level === 4 || level === 5 || level === 6 || level === 7) {
         if(TileToPlayerCollsion(X,Y,Width,Height,tileX,tileY)){
@@ -181,7 +189,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 4) {
                     player.x=canvas.width-player.width-tiles.width*13;
                     player.y = canvas.height-player.height-tiles.height
-                    enemy = new Enemy((canvas.width/2) ,(canvas.height/2),player.width,player.height,100,10,100,false);
+                    enemy = new Enemy((canvas.width/2) ,(canvas.height/2),player.width,player.height,120,17,30,false);
                     enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
@@ -216,18 +224,15 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
-                    player.y =tiles.height*15;
-                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
+                    player.y =tiles.height*14.5;
+                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,25,1000,true);
                     enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
             }
             if (player.level===5){
 
-                if (player.x>=canvas.width+player.width){
 
-                    enemy.x=0-player.width
-                }
 
                 if(level === 2) {
                     player.x=tiles.width*22;
@@ -238,8 +243,8 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 }
                 if(level === 7) {
                     player.x=tiles.width*14;
-                    player.y =tiles.height*15;
-                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,22,1000,true);
+                    player.y =tiles.height*14.5;
+                    enemy = new Enemy(tiles.width*14,(canvas.height/2)-tiles.height*2,player.width*1.4,player.height*1.4,300,25,1000,true);
                     enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
 
                 }
@@ -253,6 +258,9 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
                 if(level === 4) {
                     player.x=tiles.width*0.80;
                     player.y = tiles.height*5.5
+                    enemy = new Enemy((canvas.width/2)-tiles.width*3 ,(canvas.height/2)-tiles.height*3,player.width,player.height,130,15,100,false);
+                    enemy.load(30,6,enemy.images,"Assets/Enemy/walk/walk_down.png","Assets/Enemy/walk/walk_left.png", "Assets/Enemy/walk/walk_right.png","Assets/Enemy/walk/walk_up.png","Assets/Enemy/idle/idle_down.png")
+
                 }
             }
 
@@ -282,6 +290,7 @@ function roomPassAndInteract(level,X,Y,Width,Height,tileX,tileY){
 
 
 }
+//colisão com as estruturas do jogo, que tèm como numero no array de 10
 function structuresCollision(X,Y,Width,Height,type){
     let tileX=0
     let tileY=0
@@ -315,6 +324,9 @@ if (player.level===1){
                         return true;
                     }
                 }
+                if (Y>=canvas.height-player.height/2 && player.level===7){
+                    return true
+                }
             tileX+=tiles.width
 
         }
@@ -322,6 +334,7 @@ if (player.level===1){
     }
 
 }
+//Desenhar a vida do player no ecrã
 function Hp(){
     ctx.fillStyle="red";
     ctx.fillRect(0,0,player.maxLife*4,20)
@@ -330,7 +343,7 @@ function Hp(){
     ctx.strokeStyle= "Gold"; //set the color of the stroke line
     ctx.strokeRect(0,0,player.maxLife*4,20)
 }
-
+//Desenhar a vida do inimigo no ecrã
 function enemiesHpDraw(life,MaxLife,x,y){
    if (!enemy.boss){
     ctx.fillStyle="red";
@@ -346,7 +359,7 @@ function enemiesHpDraw(life,MaxLife,x,y){
 
 }
 
-
+//função para atacar o inimigo,(podia ser um metodo da sua classe)
 function attackToEnemy(){
 if (playerattack.attacks!=[] && enemy!=null){
    if (collision(playerattack.attacks[playerattack.attacks.length-1].x,playerattack.attacks[playerattack.attacks.length-1].y,playerattack.attacks[playerattack.attacks.length-1].width,playerattack.attacks[playerattack.attacks.length-1].height,enemy.x,enemy.y,enemy.width,enemy.height)){
@@ -362,6 +375,7 @@ playerattack.attacks.splice(playerattack.attacks.length-1,1)
        enemy.y+=10}
 }}
 }
+//função que o inimigo utiliza para saber quando ataca o inimigo
 function attackToPlayer(x,y,width,height){
 if (enemy.attacks!=[]){
    if (collision(x,y,width,height,player.x,player.y,player.width,player.height)) {
@@ -369,7 +383,7 @@ if (enemy.attacks!=[]){
        player.life -= enemy.damage
    }}
 }
-
+//Adiciobar un iten ao inventário ao clicar e
 function addItem(key){
     if(key==="e" && player.level===3){
         for(let i=0; i<player.inventory.length; i++){
@@ -461,6 +475,7 @@ function DrawstructuresCollision(){
     }
 
 }
+//Saber em que quadrante o player está em relação ao inimigo
 function quadrantePlayerAoInimigo(){
 
     if (enemy.x > player.x && enemy.y>player.y){
@@ -484,7 +499,7 @@ function quadrantePlayerAoInimigo(){
 
 
 
-
+//função que dinamicamente toca musica
 function playSong() {
     if (enemy!=null ){
         if (player.level===7){
@@ -516,7 +531,7 @@ function playSong() {
     }
 }
 
-
+//Musica diferente e para o requestAnimationframe quando o player morre
 
 function playerDeath(){
 
