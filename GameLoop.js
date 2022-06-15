@@ -58,7 +58,7 @@ function animate(){
 
     setTimeout(function () {
     animationId = requestAnimationFrame(animate);
-    DrawstructuresCollision();
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     map.draw(player.level);
 
@@ -95,7 +95,7 @@ playerDeath()
         //dialogBox.dialog=story_dialog[0];
         //dialogBox.draw();
         //---------------------------//
-
+        DrawstructuresCollision();
    /* playerattack.attacks.forEach(attack =>{ //desenho das colisões de ataque
         attack.drawCollision()
     })*/
